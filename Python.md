@@ -39,7 +39,7 @@ def Fib(n):
         def getMorse(self): print("Hello I am self")
 
      m = Morse("Filip")
-    m.getMorse();
+     m.getMorse();
 
 
 codes = { 'A':'.-', 'B':'-...',
