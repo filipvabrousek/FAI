@@ -1,5 +1,6 @@
+## SQL
 
-´´´sql
+```sql
 --CREATE DATABASE FILIP
 --GO 
 --USE FILIP
@@ -48,4 +49,4 @@ DROP COLUMN RodnePrijimeni
 --RENAME TABLE Ctenar TO Reader
 	
 
-´´´
+```
