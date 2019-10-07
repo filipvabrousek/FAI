@@ -46,7 +46,7 @@ ADD Ulice varchar(50),
 ALTER TABLE Ctenar
 DROP COLUMN RodnePrijimeni
 
---RENAME TABLE Ctenar TO Reader
+--sp_rename TABLE Ctenar TO Reader
 	
 
 ```
