@@ -1,0 +1,96 @@
+<form action="index.php">
+<input type="email" name="email" placeholder="Enter your email">
+<input type="number" name="age" placeholder="Enter your age">
+<input type="submit">
+</form>
+
+
+<?php
+$email = $_REQUEST["email"];
+$age = $_REQUEST["age"];
+$pages = 2;
+$color = "#3498db";
+
+if (isset($_REQUEST["page"])){
+	 $page = $_REQUEST["page"];
+} else {
+    $page = 1;
+}
+
+if (isset($_REQUEST["color"])){
+	 $color = $_REQUEST["color"];
+} else {
+    $color = "#3498db";
+}
+
+
+$conn = mysqli_connect("localhost", "root", "mysql");
+mysqli_query($conn, "CREATE DATABASE Learning");
+
+$conno = mysqli_connect("localhost", "root", "mysql", "Learning");
+
+
+mysqli_query($conno, "CREATE TABLE Students (email varchar(255) primary key, age int)");
+mysqli_query($conno, "INSERT INTO Students (email, age) VALUES ('$email', '$age')");
+
+/*
+$sql = "CREATE TABLE Students (email varchar(255) primary key, age int) ";
+$sql = $sql."INSERT INTO Students (email, age) VALUES ('$email', '$age')";
+mysqli_query($conno, $sql);
+*/
+
+
+$res = mysqli_query($conno, "SELECT email, age FROM Students");
+
+
+if ($page == 1){
+
+if (mysqli_num_rows($res) > 0){
+    while($row = mysqli_fetch_assoc($res)){
+        print("<section>");
+        print("<a class=\"hey\" style=\"color:$color\"  
+        
+        href=\"index.php?page=2&email=".$row["email"]."\">".$row["email"]."</a><br>");
+        print("</section>");
+    }
+}
+} else {
+    print("<h1>Welcome ".$email."</h1>"); // FROM REQUEST
+    print("<a class=\"hey\" href=\"index.php?page=1&isFriend=".$email."&color=\"green\">Add ".$email." as a friend</a><br>");
+    print("<a href=\"index.php?page=1\">Back</a><br>");
+}
+
+//mysqli_query($conno, "DELETE Students");
+
+?>
+
+<style>
+    
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    
+    section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    a {
+        text-decoration: none;
+        color: #3498db;
+        font-weight: bold;
+        margin: 1em;
+        border: 1px solid blue;
+        
+    }
+
+</style>
+
+
+
+
+<!--$sql = "CREATE TABLE Students (email varchar(255), age int) ";
+$sql = $sql."INSERT INTO Students (email, age) VALUES ('.$email.', '.$age.')";
+-->
