@@ -50,13 +50,20 @@ $res = mysqli_query($conno, "SELECT email, age FROM Students");
 
 
 
+$sql = "SELECT * FROM Photos";
+     $q = mysqli_query($conno, $sql);
+     $resx = mysqli_fetch_array($q);
+     print('<img src="data:image/jpeg;base64,'.base64_encode( $resx['photo'] ).'"/>');
+
+
+
 if (isset($_FILES["file"])){
      $filename = $_FILES["file"]["name"];
      print("</p>UPLOADED: ".$filename."</p>");
-     $sql = "CREATE TABLE Photos (id int primary key NOT NULL, photo BLOB)";
+     $sql = "CREATE TABLE IF NOT EXISTS Photos (id int primary key NOT NULL, photo BLOB)";
      mysqli_query($conno, $sql);
 
-     $id = 21; // INCREASE THIS !!!
+     $id = 54; // INCREASE THIS !!!
      $blob = addslashes(file_get_contents($_FILES["file"]["tmp_name"]));
     
      print(substr($blob, 2, 9));
@@ -65,21 +72,15 @@ if (isset($_FILES["file"])){
  if (mysqli_query($conno, $up)){
      print("<b>SUCCESS</b>");
      
-     // Show Image
-    /* $sql = "SELECT * FROM Photos";
-     $resa = mysqli_query($conno, $sql);
-     print("<p>TRYING TO SHOW!</p>");
-  
-     
-     $result=mysqli_fetch_array($sql);
-     print('<img src="data:image/jpeg;base64,'.base64_encode( $result['blob'] ).'"/>');*/
+     $sql = "SELECT * FROM Photos";
+     $q = mysqli_query($conno, $sql);
+     $resx = mysqli_fetch_array($q);
+     print('<img src="data:image/jpeg;base64,'.base64_encode( $resx['photo'] ).'"/>');
  }
     
 } else {
     print("EMPTY FILE");
 }
-
-
 
 if ($page == 1){
 
@@ -173,6 +174,11 @@ h1 {
 	text-align: center;
 	padding-top: 1em;
 }
+    
+    img {
+        width: 6em;
+        height: 6em;
+    }
     
 
 
