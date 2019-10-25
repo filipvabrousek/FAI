@@ -1,47 +1,23 @@
 <h1>Unsocial network</h1>
 
 <div id="hey">
-    <form enctype="multipart/form-data" action="index.php" method="POST">
-        <input type="email" name="email" placeholder="Enter your email">
-        <input type="number" name="age" placeholder="Enter your age">
-
-        <!---http://192.168.64.2/index.php?email=&age=&button=Submit-->
-        <input type="file" name="file" value="+" >
-         <input type="submit" name="button">
-    </form>
+<form enctype="multipart/form-data" action="index.php" method="post">
+<input type="email" name="email" placeholder="Enter your email">
+<input type="number" name="age" placeholder="Enter your age">
+<input type="file" name="file" value="+" >
+<input type="submit" name="button">
+</form>
 </div>
 
 
+
 <?php
-
-
-
-
-
 //error_reporting(0);
+$email = $_REQUEST["email"];
+$age = $_REQUEST["age"];
 $pages = 2;
 $color = "#3498db";
 $friend = "";
-$delete = "NO";
-
-
-
-
-
-
-if (isset($_REQUEST["email"])){
-	 $email = $_REQUEST["email"];
-} else {
-    $email = "";
-}
-
-
-
-if (isset($_REQUEST["age"])){
-	 $age = $_REQUEST["age"];
-} else {
-    $age = 1;
-}
 
 
 if (isset($_REQUEST["page"])){
@@ -63,77 +39,44 @@ if (isset($_REQUEST["isFriend"])){
 }
 
 
-$conno = mysqli_connect("localhost", "Filip", "WzV5kNGJjDEOjCoL", "Filip");
-mysqli_query($conno, "CREATE DATABASE Learning");
+
+
+$conno = mysqli_connect("localhost", "filipa", "password", "Learning");
+
+//mysqli_query($conno, "CREATE DATABASE Learning");
 mysqli_query($conno, "CREATE TABLE Students (email varchar(255) primary key, age int)");
 mysqli_query($conno, "INSERT INTO Students (email, age) VALUES ('$email', '$age')");
-
 $res = mysqli_query($conno, "SELECT email, age FROM Students");
 
-
-
-
-
-
-
-
-if (isset($_FILES['file'])){
-
-    
- if ($_FILES['file']['error']){
-        print("ERROR " + $_FILES['file']['error']);
-} else {
-     mkdir("Photos");
-     
-     $folder = "Photos/";
+ //http://talkerscode.com/webtricks/upload%20image%20to%20database%20and%20server%20using%20HTML,PHP%20and%20MySQL.php
+//$sql = "CREATE TABLE Photos (id int primary key NOT NULL, photo BLOB)";
+   
+if (isset($_REQUEST['email'])){
      $filename = $_FILES["file"]["name"];
-     $temp = $_FILES['file']['tmp_name'];
-         
-     move_uploaded_file($temp, $folder.$filename);
-     print("Uploaded");
-     
-     
-   $sql = "CREATE TABLE Photos (id int primary key NOT NULL AUTO INCREMENT, name varchar(100) NOT NULL)";
-   mysqli_query($conno, $sql);
-     
-     
-$filename = $_FILES["file"]["name"];
-     
-   $sqlb = "INSERT INTO Photos VALUES (".$filename.")";
-    
-     
-     
-     
-     // INSERT INTO IMAGE
-     // Show Images
-     // $images = glob("Photos");
- }
-}
+   
+     print("</p>UPLOADED: ".$filename."</p>");
+  
 
+     $id = 2;
+     $blob = addslashes(file_get_contents($_FILES["file"]["tmp_name"]));
+  //  print("BLOB".$blob);
+     $sqlb = "INSERT INTO Photos VALUES ('$id','$blob')";
+    
+ if (mysqli_query($conno, $sqlb)){
+     print("<b>SUCCESS</b>");
+     
+     // Show Image
+     
+     
+ }
+} else {
+    print("FILE ISSET FAILED");
+}
 
 
 
 if ($page == 1){
- //print("The file is " + f);
-   
-    
-   
-    
-   
-   
 
- print("<a class=\"add\" href=\"index.php?delete=YES\">DELETE</a><br>");
-    
-
-   
-
-if (isset($_REQUEST["delete"])){
-    // print("<script>alert('wow')</script>");
-	mysqli_query($conno, "DROP TABLE Students");
-    //mysqli_query($conno, "DROP TABLE Students");
-}
-    
-    
 if (mysqli_num_rows($res) > 0){
     while($row = mysqli_fetch_assoc($res)){
         print("<section>");
@@ -161,68 +104,65 @@ if (mysqli_num_rows($res) > 0){
 
 //mysqli_query($conno, "DELETE Students");
 
+
+
 ?>
 
+
 <style>
-    * {
-        margin: 0;
-        padding: 0;
-        font-family: Arial;
-    }
+* {
+	margin: 0;
+	padding: 0;
+	font-family: Arial;
+}
 
-    section {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-    }
+section {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
 
-    a {
-        text-decoration: none;
-        color: #3498db;
-        font-weight: bold;
-        margin: 1em;
-    }
+a {
+	text-decoration: none;
+	color: #3498db;
+	font-weight: bold;
+	margin: 1em;
+}
 
-    input {
-        padding: 1em;
-        border: none;
-        border: 2px solid gray;
-        border-radius: 6px;
-    }
+input {
+	padding: 1em;
+	border: none;
+	border: 2px solid gray;
+	border-radius: 6px;
+}
 
-    .high {
-        color: orange;
-    }
+.high {
+	color: orange;
+}
 
-    #hey {
-        padding-top: 1em;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+#hey {
+	padding-top: 1em;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
 
-    .add {
-        display: block;
-        background: gray;
-        color: white;
-        text-align: center;
-        padding: 2em;
-        width: 6em;
-        margin-left: auto;
-        margin-right: auto
-    }
+.add {
+	display: block;
+	background: gray;
+	color: white;
+	text-align: center;
+	padding: 2em;
+	width: 6em;
+	margin-left: auto;
+	margin-right: auto
+}
 
-    h1 {
-        text-align: center;
-        padding-top: 1em;
-    }
+h1 {
+	text-align: center;
+	padding-top: 1em;
+}
+
 
 </style>
-
-
-
-
-<!--$sql = "CREATE TABLE Students (email varchar(255), age int) ";
-$sql = $sql."INSERT INTO Students (email, age) VALUES ('.$email.', '.$age.')";
--->
