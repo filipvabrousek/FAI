@@ -43,7 +43,7 @@ if (isset($_REQUEST["isFriend"])){
 
 $conno = mysqli_connect("localhost", "filipa", "password", "Learning");
 
-//mysqli_query($conno, "CREATE DATABASE Learning");
+mysqli_query($conno, "CREATE DATABASE Learning");
 mysqli_query($conno, "CREATE TABLE Students (email varchar(255) primary key, age int)");
 mysqli_query($conno, "INSERT INTO Students (email, age) VALUES ('$email', '$age')");
 $res = mysqli_query($conno, "SELECT email, age FROM Students");
@@ -51,24 +51,38 @@ $res = mysqli_query($conno, "SELECT email, age FROM Students");
  //http://talkerscode.com/webtricks/upload%20image%20to%20database%20and%20server%20using%20HTML,PHP%20and%20MySQL.php
 //$sql = "CREATE TABLE Photos (id int primary key NOT NULL, photo BLOB)";
    
-if (isset($_REQUEST['email'])){
+//if (isset($_REQUEST['email'])){
+
+
+
+if (isset($_FILES["file"])){
      $filename = $_FILES["file"]["name"];
    
      print("</p>UPLOADED: ".$filename."</p>");
   
 
-     $id = 2;
+     $id = 18; // INCREASE THIS !!!
      $blob = addslashes(file_get_contents($_FILES["file"]["tmp_name"]));
-  //  print("BLOB".$blob);
-     $sqlb = "INSERT INTO Photos VALUES ('$id','$blob')";
     
- if (mysqli_query($conno, $sqlb)){
+    print(substr($blob, 2, 9));
+     $up = "INSERT INTO Photos VALUES ('$id','$blob')";
+   // mysqli_query($conno, $up);
+    
+ if (mysqli_query($conno, $up)){
      print("<b>SUCCESS</b>");
      
      // Show Image
+    /* $sql = "SELECT * FROM Photos";
+     $resa = mysqli_query($conno, $sql);
+     print("<p>TRYING TO SHOW!</p>");
+  
      
-     
+     $result=mysqli_fetch_array($sql);
+     print('<img src="data:image/jpeg;base64,'.base64_encode( $result['blob'] ).'"/>');*/
  }
+    
+    
+    
 } else {
     print("FILE ISSET FAILED");
 }
