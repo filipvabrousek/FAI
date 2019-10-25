@@ -48,25 +48,19 @@ mysqli_query($conno, "CREATE TABLE Students (email varchar(255) primary key, age
 mysqli_query($conno, "INSERT INTO Students (email, age) VALUES ('$email', '$age')");
 $res = mysqli_query($conno, "SELECT email, age FROM Students");
 
- //http://talkerscode.com/webtricks/upload%20image%20to%20database%20and%20server%20using%20HTML,PHP%20and%20MySQL.php
-//$sql = "CREATE TABLE Photos (id int primary key NOT NULL, photo BLOB)";
-   
-//if (isset($_REQUEST['email'])){
-
 
 
 if (isset($_FILES["file"])){
      $filename = $_FILES["file"]["name"];
-   
      print("</p>UPLOADED: ".$filename."</p>");
-  
+     $sql = "CREATE TABLE Photos (id int primary key NOT NULL, photo BLOB)";
+     mysqli_query($conno, $sql);
 
-     $id = 18; // INCREASE THIS !!!
+     $id = 21; // INCREASE THIS !!!
      $blob = addslashes(file_get_contents($_FILES["file"]["tmp_name"]));
     
-    print(substr($blob, 2, 9));
+     print(substr($blob, 2, 9));
      $up = "INSERT INTO Photos VALUES ('$id','$blob')";
-   // mysqli_query($conno, $up);
     
  if (mysqli_query($conno, $up)){
      print("<b>SUCCESS</b>");
@@ -81,10 +75,8 @@ if (isset($_FILES["file"])){
      print('<img src="data:image/jpeg;base64,'.base64_encode( $result['blob'] ).'"/>');*/
  }
     
-    
-    
 } else {
-    print("FILE ISSET FAILED");
+    print("EMPTY FILE");
 }
 
 
@@ -116,9 +108,13 @@ if (mysqli_num_rows($res) > 0){
     print("</div>");
 }
 
+
+
+
+
 //mysqli_query($conno, "DELETE Students");
 
-
+ //http://talkerscode.com/webtricks/upload%20image%20to%20database%20and%20server%20using%20HTML,PHP%20and%20MySQL.php
 
 ?>
 
@@ -177,6 +173,8 @@ h1 {
 	text-align: center;
 	padding-top: 1em;
 }
+    
+
 
 
 </style>
