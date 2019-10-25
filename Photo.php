@@ -10,9 +10,10 @@
 </div>
 
 
+<h2>Photos</h2>
 
 <?php
-//error_reporting(0);
+error_reporting(0);
 $email = $_REQUEST["email"];
 $age = $_REQUEST["age"];
 $pages = 2;
@@ -63,7 +64,7 @@ if (isset($_FILES["file"])){
      $sql = "CREATE TABLE IF NOT EXISTS Photos (id int primary key NOT NULL, photo BLOB)";
      mysqli_query($conno, $sql);
 
-     $id = 54; // INCREASE THIS !!!
+     $id = 59; // INCREASE THIS !!!
      $blob = addslashes(file_get_contents($_FILES["file"]["tmp_name"]));
     
      print(substr($blob, 2, 9));
@@ -79,11 +80,11 @@ if (isset($_FILES["file"])){
  }
     
 } else {
-    print("EMPTY FILE");
+    //print("EMPTY FILE");
 }
 
 if ($page == 1){
-
+print("<h2>Users</h2>");
 if (mysqli_num_rows($res) > 0){
     while($row = mysqli_fetch_assoc($res)){
         print("<section>");
