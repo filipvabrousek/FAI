@@ -20,8 +20,10 @@ if (isset($_FILES["file"])){
     
      $conno = mysqli_connect("localhost", "filipa", "password");
      mysqli_query($conno, "CREATE DATABASE Shots");  
+     
      $conb = mysqli_connect("localhost", "filipa", "password", "Shots");
      mysqli_query($conb, "CREATE TABLE Users (id int primary key NOT NULL, email varchar(255), photo BLOB)");
+    
      $conb = mysqli_connect("localhost", "filipa", "password", "Shots");
      $id = rand(1000, 10000);
      $blob = addslashes(file_get_contents($_FILES["file"]["tmp_name"]));
