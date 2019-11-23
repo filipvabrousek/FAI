@@ -71,25 +71,14 @@ VALUES(1, 1, "Comment 1"),
 SELECT content FROM Posts WHERE idPost = 1;
 
 
-
-
-
-
-
-/* FIX BELOW*/
-
-/*POST LONGER THAN 100 CHARACTERS*/
-SELECT content FROM Posts WHERE LEN(content) > 100;
-
 /*SELECT ALL PRIVATE POSTS*/
-SELECT idPost FROM Posts LEFT JOIN PostSettings ON Posts.idPosts = PostSettings.idSettings WHERE private = 1;
+SELECT Posts.idPost FROM Posts LEFT JOIN PostSettings ON Posts.idPost = PostSettings.idSettings WHERE private = 1;
 
-/*SELECT ALL POSTS FROM 2018*/
-SELECT content FROM Posts WHERE DATEPART(YEAR(date)) = 2018;
+/*SELECT ALL POSTS WITH CZECH VISITORS */
+SELECT Posts.idPost FROM Posts LEFT JOIN Visitors ON Posts.idPost = Visitors.idPost WHERE nameCountry = "CZE";
 
+/*SELECT LONGEST STRING */
+SELECT content FROM Posts ORDER BY LENGTH(content) DESC LIMIT 1;
 
-
-/*GROUP POSTS BY YEAR */
-
-SELECT content FROM Posts WHERE id = 1;
-
+/*UPDATE*/
+UPDATE Posts SET heading = 1 WHERE idPost = 1;
