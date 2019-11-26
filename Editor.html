@@ -1,0 +1,140 @@
+<section class="editor">
+<button id="header">+ Header</button>
+<button id="paragraph">+ Paragraph</button>
+<button id="image">+ Image</button>
+<button id="export">Export</button>
+
+</section>
+
+<section class="editor">
+<input type="range" min="0" max="100" value="1" id="slider" id="myRange">
+</section>
+<code>
+
+</code>
+
+
+
+<section id="content">
+   
+
+    
+</section>
+
+<style>
+
+     * {
+       font-family: "SFProBold", Arial;
+           margin: 0;
+         color: white;
+           
+        }
+        
+        img {
+            width: 100vw;
+        }
+    
+    
+    code {
+        background: #ecf0f1;
+        padding: 1em;
+        color: black;
+        top: 1em;
+        margin-bottom: 1em;
+    }
+    
+    .editor {
+    display: flex;
+        justify-content: center;
+        align-content: center;
+        margin: 1em;
+    
+    }
+    
+    #editor button {
+        padding: 1em;
+        border: none;
+        background: none;
+        color: #3498db;
+        font-weight: bold;
+    }
+    
+    button{
+        color: black;
+    }
+    
+    h1, p {
+        color: black;
+    }
+    
+     
+</style>
+
+
+
+
+
+<script>
+
+const S = el => document.querySelector(el);
+const SA = el => document.querySelectorAll(el);
+    
+function hey(el) {
+   alert("EJ " + el * 2);
+}
+    
+S("#header").addEventListener("click", () => {
+    S("#content").innerHTML += "<h1 style=\"font-family: Arial\"  contentEditable='true'>Hello</h1>";
+    
+     let res = S("#content").innerHTML;
+    S("code").textContent = `${res}`;
+      
+});
+    
+S("#paragraph").addEventListener("click", () => {
+    S("#content").innerHTML += "<p contentEditable='true'>It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>";
+    
+     let res = S("#content").innerHTML;
+    S("code").textContent = `${res}`;
+      
+});
+    
+    
+let s = S("#slider");
+s.addEventListener("change", () => {
+    console.log("Value " + s.value);
+    
+    SA("h1").forEach(el => el.setAttribute("style", `padding: ${s.value}`));
+    SA("p").forEach(el => el.setAttribute("style", `padding: ${s.value}`));
+    SA("img").forEach(el => el.setAttribute("style", `padding: ${s.value}`));
+    
+    let res = S("#content").innerHTML;
+    S("code").textContent = `${res}`;
+});
+    
+S("#image").addEventListener("click", () => {
+    S("#content").innerHTML += "<img src='https://www.nps.gov/common/uploads/grid_builder/deva/crop16_9/9B65A85A-1DD8-B71B-0BDF4BF50595F57F.jpg?width=950&quality=90&mode=crop'>";
+    
+     let res = S("#content").innerHTML;
+    S("code").textContent = `${res}`;   
+});
+    
+S("#export").addEventListener("click", () => {
+    SA("h1").forEach(el => el.setAttribute("contenteditable", "false"));
+    SA("p").forEach(el => el.setAttribute("contenteditable", "false"));
+    let res = S("#content").innerHTML;
+    S("code").textContent = `${res}`;
+});
+</script>
+
+<style>
+       * {
+       font-family: "SFProBold", Arial;
+           margin: 0;
+           display: block;
+        }
+        
+        img {
+            width: 100vw;
+        }
+</style>-->
