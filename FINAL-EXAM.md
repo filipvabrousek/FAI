@@ -29,5 +29,8 @@ SELECT * FROM Objednavky WHERE Cena > Avg(Cena)
 SELECT 
 ```
 
-### 12
-* referenční integrita = 
+
+
+
+# Moodle
+* úrovně Modelu ANSI
