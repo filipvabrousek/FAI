@@ -9,7 +9,7 @@
 
 ### SQL
 * ``` RIGHT JOIN``` = každý záznam z 1. tabulky, se musí spojit se záznamem z 2., pokud nenejde, spojí se s null
-* ```LEFT JOIN```
+* ```LEFT JOIN``` = každý záznam z 1. tabulky, se musí spojit se záznamem z 2., pokud nenajde z pravé, není match
 
 
 
@@ -45,8 +45,8 @@ CROSS JOIN
 ```
 
 ```sql
-
-
+SELECT * FROM Uzivatel WHERE Projmeni LIKE "A%"
+UPDATE TRIGGER
 ```
 
 ``sql
