@@ -33,7 +33,7 @@ SELECT k.n, Avg(p.cena) FROM Kategorie AS k INNER JOIN Produkty AS p ON k.id = p
 SELECT * FROM Kat WHERE katID NOT IN (SELECT DISTINCT KatID FROM produkty)
 SELECT LEFT("Karel Jaromír Erben", 5)
 SELECT * FROM Kniha WHERE Cena > 100
-
+```
 
 ```sql
 CREATE VIEW p AS SELECT x, y, z FROM Student s JOIN Zapis z ON s.id = z.id
@@ -46,6 +46,9 @@ CROSS JOIN
 
 ```sql
 SELECT * FROM Uzivatel WHERE Projmeni LIKE "A%"
+```
+
+```sql
 UPDATE TRIGGER
 ```
 
