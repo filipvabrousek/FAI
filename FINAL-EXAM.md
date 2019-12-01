@@ -89,19 +89,14 @@ SELECT CEILING(9.7) AS x --FLOOR
 ```sql
 SELECT CONCAT('W3Schools', '.com')
 SELECT REVERSE("Tutorial")
+SELECT REPLICATE('Another', 3)
 SELECT CHAR(65)
 SELECT CHARINDEX("t", "Customer") AS p
-SELECT STR(180)
+SELECT REPLACE("Milip", "M", "F")
+SELECT STR(180) 
 ```
 
-```sql
-REPLACE(1, 2, 3) - vyhledá ř. 1 v řeť 2 anhr řeť 3
-REVERSE(str)
-REPLICATE(str, n)
-CHAR(n) číslo na řetezec
-STR(n) reálné číslo na celočíselný řetězec
-CHARINDEX(term1, term2) - vypíše poč. pozici výrazu 1 a 2
-```
+
 
 
 ### Cast
