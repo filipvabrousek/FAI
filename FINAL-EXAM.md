@@ -16,7 +16,7 @@
 * přidat atribut = (přidat sloupec)
 * referenční integrita = definuje se cizím klíčem nad dvojicí tabulek, nebo nad 1 tabulkou, která obsahuje závislá data
 * INDEX není tabulka
-* Logická nezávislost dat = Odolnost externích schémat při změnách konceptuálního schématu
+
 
 
 ### Kardinalita
