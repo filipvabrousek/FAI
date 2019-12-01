@@ -3,13 +3,16 @@
 ## Theory
 * ANSI = externí, koneptuální, interní a fyzická
 * logická nezávislost dat = odolnost externích schémat při změnách konceptuálního schématu
+* množinové operace = sjednocení, průnik, rozdíl, kartézský součin
+
 
 ### Integrita
 * databáze konzistentní když hodnoty uložené vícenásobně (na různých místech) jsou různé
 * cizích klíčů může být více
 * každá hodnota cizího klíče je buď plně zadaná / plně nezadaná
 * do pole cizího klíče nejde dát hodnota, která není v primárním klíči
-* * slabá entita* = pro její identifikaci musí být použit atribut jiné entity.
+* **slabá entita** = pro její identifikaci musí být použit atribut jiné entity.
+* referenční integrita = 
 
 ### Kardinalita
 * 1:1, 1:n, m:n
