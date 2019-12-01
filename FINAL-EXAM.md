@@ -59,6 +59,7 @@ SELECT LEFT("Karel Jaromír Erben", 5)
 SELECT k.n, Avg(p.cena) FROM Kategorie AS k 
 INNER JOIN Produkty AS p ON k.id = p.id GROUP BY k.nazev
 SELECT * FROM Kat WHERE katID NOT IN (SELECT DISTINCT KatID FROM produkty)
+```
 
 ```sql
 SELECT * FROM Kniha WHERE Cena > 100
@@ -71,18 +72,12 @@ JOIN Pr p ON s.id = p.id
 
 ```sql
 CROSS JOIN
+UPDATE TRIGGER
+ALTER TABLE Kniha ADD PRIMARY KEY (IDKnihy)
 ```
 
 ```sql
 SELECT * FROM Uzivatel WHERE Projmeni LIKE "A%"
-```
-
-```sql
-UPDATE TRIGGER
-```
-
-```sql
-ALTER TABLE Kniha ADD PRIMARY KEY (IDKnihy)
 ```
 
 ### Lecture
@@ -132,7 +127,7 @@ INNER JOIN ……(MONTH, o.DatumVytvoreni = 11 ) ORDER BY p.Nazev
 ### Another
 
 #### 9
-```
+```sql
 SELECT Druh, Count(DruhProdejeID) Počet FROM Nemovitosti 
 INNER JOIN DruhProdeje ON DruhProdejeID = Nemovitosti.DruhProdejeID GROUP BY Druh
 ```
