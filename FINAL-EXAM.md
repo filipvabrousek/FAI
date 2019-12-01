@@ -1,8 +1,7 @@
 ## Final exam
 
 ## Theory
-* ANSI = externí, koneptuální, fyzická a logická úroveň
-* Schémata: externí, logická, interní
+* ANSI = externí, koneptuální, interní a fyzická
 * logická nezávislost dat = odolnost externích schémat při změnách konceptuálního schématu
 
 ### Integrita
@@ -10,7 +9,7 @@
 * cizích klíčů může být více
 * každá hodnota cizího klíče je buď plně zadaná / plně nezadaná
 * do pole cizího klíče nejde dát hodnota, která není v primárním klíči
-
+* * slabá entita* = pro její identifikaci musí být použit atribut jiné entity.
 
 ### Kardinalita
 * 1:1, 1:n, m:n
@@ -22,6 +21,13 @@
 
 
 ## Queries
+
+
+```sql
+INSERT INTO Data SELECT * FROM Book
+```
+
+
 ```sql
 DELETE FROM P WHERE dID IN (SELECT dID FROM D WHERE WHERE Nazev = D)
 DELETE FROM D WHERE Nazev = "D"
@@ -30,7 +36,7 @@ SELECT * FROM Objednavky WHERE Cena > Avg(Cena)
 
 ```sql
 SELECT * FROM N WHERE NId IN (SELECT NId FROM nemovitostiTyp
-WHERE nemovitostiTypParentID=1)
+WHERE parentID=1)
 ```
 
 ```sql
@@ -105,6 +111,18 @@ SELECT STR(180)
 ### Vánoce
 ```sql
 SELECT datediff(day,getdate(),replace(´rok-12-24´,´rok´year(getdate()))
+```
+
+```sql
+0, 2, 4, 6, 8
+SELECTp.Produkty, p.Nazev, p.Cena FROM Objednavky AS o INNER JOIN ……(MONTH, o.DatumVytvoreni = 11 ) ORDER BY p.Nazev
+```
+
+### ANother
+
+``sql
+
+
 ```
 ### Cast
 ```sql
