@@ -56,7 +56,8 @@ SELECT LEFT("Karel Jaromír Erben", 5)
 
 # Moodle
 ```sql
-SELECT k.n, Avg(p.cena) FROM Kategorie AS k INNER JOIN Produkty AS p ON k.id = p.id GROUP BY k.nazev
+SELECT k.n, Avg(p.cena) FROM Kategorie AS k 
+INNER JOIN Produkty AS p ON k.id = p.id GROUP BY k.nazev
 SELECT * FROM Kat WHERE katID NOT IN (SELECT DISTINCT KatID FROM produkty)
 
 ```sql
@@ -124,14 +125,16 @@ SELECT datediff(day,getdate(),replace(´rok-12-24´,´rok´year(getdate()))
 
 ```sql
 0, 2, 4, 6, 8
-SELECT p.x, p.n, p.c FROM Objednavky AS o INNER JOIN ……(MONTH, o.DatumVytvoreni = 11 ) ORDER BY p.Nazev
+SELECT p.x, p.n, p.c FROM Objednavky AS o
+INNER JOIN ……(MONTH, o.DatumVytvoreni = 11 ) ORDER BY p.Nazev
 ```
 
 ### Another
 
 #### 9
 ```
-SELECT Druh, Count(DruhProdejeID) Počet FROM Nemovitosti INNER JOIN DruhProdeje ON DruhProdejeID = Nemovitosti.DruhProdejeID GROUP BY Druh
+SELECT Druh, Count(DruhProdejeID) Počet FROM Nemovitosti 
+INNER JOIN DruhProdeje ON DruhProdejeID = Nemovitosti.DruhProdejeID GROUP BY Druh
 ```
 
 ```sql
