@@ -64,26 +64,46 @@ UPDATE TRIGGER
 ALTER TABLE Kniha ADD PRIMARY KEY (IDKnihy)
 ```
 
-
-### Other SQL
+### Lecture
 ```sql
-GETDATE() - aktuální datum a čas ze serveru
-CURRENT_TIMESTAMP
+GETDATE() - current date and time
+SELECT CURRENT_TIMESTAMP
+DATEPART(month, '2017/08/25')
+DATEDIFF(year, '2017/08/25', '2011/08/25')
+```
 
-DATEPART(interval, datum)
-DATEADD(interval, datum)
-DATEDIFF(interval, datum1? datum2)
+``sql
+DECLARE @d DATETIME = '01/12/2019';
+SELECT FORMAT (@d, 'd', 'en-US') AS 'res'
+```
 
-FORMAT(datum, maska, [jazyk])
-ROUND - zaokrouhlí, stejný počet míst (3.14000000000)
-CEILING
-FLOOR
 
-SELECT CONCAT('W3Schools', '.com');
+## Math
+* stejný počet míst (3.14000000000)
+```sql
+SELECT ROUND(9.7) AS x
+SELECT CEILING(9.7) AS x --FLOOR
+```
+
+## String
+```sql
+SELECT CONCAT('W3Schools', '.com')
+SELECT REVERSE("Tutorial")
+SELECT CHAR(65)
+SELECT CHARINDEX("t", "Customer") AS p
+SELECT STR(180)
+```
+
+```sql
 REPLACE(1, 2, 3) - vyhledá ř. 1 v řeť 2 anhr řeť 3
 REVERSE(str)
 REPLICATE(str, n)
 CHAR(n) číslo na řetezec
 STR(n) reálné číslo na celočíselný řetězec
 CHARINDEX(term1, term2) - vypíše poč. pozici výrazu 1 a 2
+```
+
+### Cast
+```sql
+SELECT CAST("2019-08-19" AS DATE);
 ```
