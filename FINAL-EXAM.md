@@ -66,7 +66,7 @@ ALTER TABLE Kniha ADD PRIMARY KEY (IDKnihy)
 
 ### Lecture
 ```sql
-GETDATE() - current date and time
+GETDATE()
 SELECT CURRENT_TIMESTAMP
 DATEPART(month, '2017/08/25')
 DATEDIFF(year, '2017/08/25', '2011/08/25')
