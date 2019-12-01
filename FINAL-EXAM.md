@@ -79,7 +79,7 @@ ROUND - zaokrouhlí, stejný počet míst (3.14000000000)
 CEILING
 FLOOR
 
-CONCAT (totéž co v JS :D)
+SELECT CONCAT('W3Schools', '.com');
 REPLACE(1, 2, 3) - vyhledá ř. 1 v řeť 2 anhr řeť 3
 REVERSE(str)
 REPLICATE(str, n)
