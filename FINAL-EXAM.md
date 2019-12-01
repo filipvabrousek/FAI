@@ -4,6 +4,7 @@
 * ANSI = externí, koneptuální, interní a fyzická
 * logická nezávislost dat = odolnost externích schémat při změnách konceptuálního schématu
 * množinové operace = sjednocení, průnik, rozdíl, kartézský součin
+* CASE Systémy =  nástroje pro podporu analýzy a visuálního navrhování databázových struktur.
 
 
 ### Integrita
@@ -12,7 +13,10 @@
 * každá hodnota cizího klíče je buď plně zadaná / plně nezadaná
 * do pole cizího klíče nejde dát hodnota, která není v primárním klíči
 * **slabá entita** = pro její identifikaci musí být použit atribut jiné entity.
+* přidat atribut = (přidat sloupec)
 * referenční integrita = 
+
+
 
 ### Kardinalita
 * 1:1, 1:n, m:n
@@ -71,7 +75,7 @@ SELECT * FROM Uzivatel WHERE Projmeni LIKE "A%"
 ```
 
 ```sql
-UPDATE TRIGGER
+ALTER TRIGGER
 ```
 
 ```sql
