@@ -7,7 +7,7 @@
 
 
 ### Integrita
-* databáze konzistentní když hodnoty uložené vícenásobně (na různých místech) jsou různé
+* databáze NENÍ konzistentní když hodnoty uložené vícenásobně (na různých místech) jsou různé
 * cizích klíčů může být více
 * každá hodnota cizího klíče je buď plně zadaná / plně nezadaná
 * do pole cizího klíče nejde dát hodnota, která není v primárním klíči
@@ -18,8 +18,8 @@
 * 1:1, 1:n, m:n
 
 ### SQL
-* ``` RIGHT JOIN``` = každý záznam z 1. tabulky, se musí spojit se záznamem z 2., pokud nenejde, spojí se s null
-* ```LEFT JOIN``` = každý záznam z 1. tabulky, se musí spojit se záznamem z 2., pokud nenajde z pravé, není match
+* ``` RIGHT JOIN``` = každý záznam z R tabulky, se musí spojit se záznamem z L, pokud nenejde, spojí se s null
+* ```LEFT JOIN``` = každý záznam z " tabulky, se musí spojit se záznamem z R, pokud nenajde z pravé, není match
 
 
 
