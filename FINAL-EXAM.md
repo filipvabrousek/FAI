@@ -17,8 +17,8 @@
 * referenční integrita = definuje se cizím klíčem nad dvojicí tabulek, nebo nad 1 tabulkou, která obsahuje závislá data
 * konceptuální úroveň = se popisuje logická struktura dat a vztahy mezi nimi
 
-* ``` RIGHT JOIN``` = každý záznam z druhé tabulky se musí spojit s některým záznamem první tabulky, jinak NULL
-* ```LEFT JOIN``` = každý záznam z " tabulky, se musí spojit se záznamem z R, pokud nenajde z pravé, není match
+* **RIGHT** = každý záznam z druhé tabulky se musí spojit s některým záznamem první tabulky, jinak NULL
+* **LEFT** = každý záznam z 1. tabulky, se musí spojit se záznamem z 2., pokud null z pravé, není match
 
 ```sql
 INSERT INTO Data SELECT * FROM Book
@@ -40,7 +40,6 @@ SELECT DATEADD(hour, 12, getDate())
 SELECT LEFT("Karel Jaromír Erben", 5)
 ```
 
-# Moodle
 ```sql
 SELECT k.n, Avg(p.cena) FROM Kategorie AS k 
 INNER JOIN Produkty AS p ON k.id = p.id GROUP BY k.nazev
@@ -81,13 +80,11 @@ DECLARE @d DATETIME = '01/12/2019';
 SELECT FORMAT (@d, 'd', 'en-US') AS 'res'
 ```
 
-## Math
 ```sql
 SELECT ROUND(9.7) AS x
 SELECT CEILING(9.7) AS x --FLOOR
 ```
 
-## String
 ```sql
 SELECT CONCAT('W3Schools', '.com')
 SELECT REVERSE("Tutorial")
@@ -98,7 +95,6 @@ SELECT REPLACE("Milip", "M", "F")
 SELECT STR(180) 
 ```
 
-### Vánoce
 ```sql
 SELECT datediff(day,getdate(),replace(´rok-12-24´,´rok´year(getdate()))
 ```
@@ -109,7 +105,6 @@ SELECT p.x, p.n, p.c FROM Objednavky AS o
 INNER JOIN ……(MONTH, o.DatumVytvoreni = 11 ) ORDER BY p.Nazev
 ```
 
-#### 9
 ```sql
 SELECT Druh, Count(DruhProdejeID) Počet FROM Nemovitosti 
 INNER JOIN DruhProdeje ON DruhProdejeID = Nemovitosti.DruProID GROUP BY Druh
