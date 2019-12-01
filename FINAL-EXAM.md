@@ -2,10 +2,18 @@
 
 ## Theory
 * externí, koneptuální, fyzická a logická úroveň
+* Schémata: externí, logická, interní
 
 ### Integrita
 * databáze konzistentní když hodnoty uložené vícenásobně (na různých místech) jsou různé
 * cizích klíčů může být více
+* každá hodnota cizího klíče je buď plně zadaná / plně nezadaná
+* do pole cizího klíče nejde dát hodnota, která není v primárním klíči
+
+
+
+### Kardinalita
+* 1:1, 1:n, m:n
 
 ### SQL
 * ``` RIGHT JOIN``` = každý záznam z 1. tabulky, se musí spojit se záznamem z 2., pokud nenejde, spojí se s null
@@ -52,12 +60,30 @@ SELECT * FROM Uzivatel WHERE Projmeni LIKE "A%"
 UPDATE TRIGGER
 ```
 
-``sql
+```sql
 ALTER TABLE Kniha ADD PRIMARY KEY (IDKnihy)
 ```
 
 
+### Other SQL
 ```sql
--- non Moodle
-1d, 3a, 8, 9, 10, 11 Není
+GETDATE() - aktuální datum a čas ze serveru
+CURRENT_TIMESTAMP
+
+DATEPART(interval, datum)
+DATEADD(interval, datum)
+DATEDIFF(interval, datum1? datum2)
+
+FORMAT(datum, maska, [jazyk])
+ROUND - zaokrouhlí, stejný počet míst (3.14000000000)
+CEILING
+FLOOR
+
+CONCAT (totéž co v JS :D)
+REPLACE(1, 2, 3) - vyhledá ř. 1 v řeť 2 anhr řeť 3
+REVERSE(str)
+REPLICATE(str, n)
+CHAR(n) číslo na řetezec
+STR(n) reálné číslo na celočíselný řetězec
+CHARINDEX(term1, term2) - vypíše poč. pozici výrazu 1 a 2
 ```
