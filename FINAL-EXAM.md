@@ -72,7 +72,7 @@ DATEPART(month, '2017/08/25')
 DATEDIFF(year, '2017/08/25', '2011/08/25')
 ```
 
-``sql
+```sql
 DECLARE @d DATETIME = '01/12/2019';
 SELECT FORMAT (@d, 'd', 'en-US') AS 'res'
 ```
@@ -102,6 +102,7 @@ CHAR(n) číslo na řetezec
 STR(n) reálné číslo na celočíselný řetězec
 CHARINDEX(term1, term2) - vypíše poč. pozici výrazu 1 a 2
 ```
+
 
 ### Cast
 ```sql
