@@ -1,15 +1,15 @@
 ## Final exam
 
 ## Theory
-* externí, koneptuální, fyzická a logická úroveň
+* ANSI = externí, koneptuální, fyzická a logická úroveň
 * Schémata: externí, logická, interní
+* logická nezávislost dat = odolnost externích schémat při změnách konceptuálního schématu
 
 ### Integrita
 * databáze konzistentní když hodnoty uložené vícenásobně (na různých místech) jsou různé
 * cizích klíčů může být více
 * každá hodnota cizího klíče je buď plně zadaná / plně nezadaná
 * do pole cizího klíče nejde dát hodnota, která není v primárním klíči
-* 
 
 
 ### Kardinalita
@@ -26,6 +26,11 @@
 DELETE FROM P WHERE dID IN (SELECT dID FROM D WHERE WHERE Nazev = D)
 DELETE FROM D WHERE Nazev = "D"
 SELECT * FROM Objednavky WHERE Cena > Avg(Cena)
+```
+
+```sql
+SELECT * FROM N WHERE NId IN (SELECT NId FROM nemovitostiTyp
+WHERE nemovitostiTypParentID=1)
 ```
 
 ```sql
@@ -97,8 +102,10 @@ SELECT STR(180)
 ```
 
 
-
-
+### Vánoce
+```sql
+SELECT datediff(day,getdate(),replace(´rok-12-24´,´rok´year(getdate()))
+```
 ### Cast
 ```sql
 SELECT CAST("2019-08-19" AS DATE);
