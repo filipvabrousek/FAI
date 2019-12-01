@@ -4,8 +4,7 @@
 * ANSI = externí, koneptuální, interní a fyzická
 * logická nezávislost dat = odolnost externích schémat při změnách konceptuálního schématu
 * množinové operace = sjednocení, průnik, rozdíl, kartézský součin
-* CASE Systémy =  nástroje pro podporu analýzy a visuálního navrhování databázových struktur.
-
+* CASE Systémy =  nástroje pro podporu analýzy a visuálního navrhování databázových struktur
 
 ### Integrita
 * databáze NENÍ konzistentní když hodnoty uložené vícenásobně (na různých místech) jsou různé
@@ -14,27 +13,16 @@
 * do pole cizího klíče nejde dát hodnota, která není v primárním klíči
 * **slabá entita** = pro její identifikaci musí být použit atribut jiné entity.
 * přidat atribut = (přidat sloupec)
-* referenční integrita = definuje se cizím klíčem nad dvojicí tabulek, nebo nad 1 tabulkou, která obsahuje závislá data
 * INDEX není tabulka
+* referenční integrita = definuje se cizím klíčem nad dvojicí tabulek, nebo nad 1 tabulkou, která obsahuje závislá data
+* konceptuální úroveň = se popisuje logická struktura dat a vztahy mezi nimi
 
-
-
-### Kardinalita
-* 1:1, 1:n, m:n
-
-### SQL
 * ``` RIGHT JOIN``` = každý záznam z druhé tabulky se musí spojit s některým záznamem první tabulky, jinak NULL
 * ```LEFT JOIN``` = každý záznam z " tabulky, se musí spojit se záznamem z R, pokud nenajde z pravé, není match
-
-
-
-## Queries
-
 
 ```sql
 INSERT INTO Data SELECT * FROM Book
 ```
-
 
 ```sql
 DELETE FROM P WHERE dID IN (SELECT dID FROM D WHERE WHERE Nazev = D)
@@ -51,8 +39,6 @@ WHERE parentID=1)
 SELECT DATEADD(hour, 12, getDate())
 SELECT LEFT("Karel Jaromír Erben", 5)
 ```
-
-
 
 # Moodle
 ```sql
@@ -71,6 +57,11 @@ JOIN Pr p ON s.id = p.id
 ```
 
 ```sql
+SELECT COUNT (*) Počet FROM N 
+JOIN Stat ON N.StatID = Stat.StatID WHERE (Stat.Nazev = CZ)
+```
+
+```sql
 CROSS JOIN
 UPDATE TRIGGER
 ALTER TABLE Kniha ADD PRIMARY KEY (IDKnihy)
@@ -79,23 +70,18 @@ ALTER TABLE Kniha ADD PRIMARY KEY (IDKnihy)
 ```sql
 SELECT * FROM Uzivatel WHERE Projmeni LIKE "A%"
 ```
-
-### Lecture
 ```sql
 GETDATE()
 SELECT CURRENT_TIMESTAMP
 DATEPART(month, '2017/08/25')
 DATEDIFF(year, '2017/08/25', '2011/08/25')
 ```
-
 ```sql
 DECLARE @d DATETIME = '01/12/2019';
 SELECT FORMAT (@d, 'd', 'en-US') AS 'res'
 ```
 
-
 ## Math
-* stejný počet míst (3.14000000000)
 ```sql
 SELECT ROUND(9.7) AS x
 SELECT CEILING(9.7) AS x --FLOOR
@@ -112,7 +98,6 @@ SELECT REPLACE("Milip", "M", "F")
 SELECT STR(180) 
 ```
 
-
 ### Vánoce
 ```sql
 SELECT datediff(day,getdate(),replace(´rok-12-24´,´rok´year(getdate()))
@@ -124,18 +109,22 @@ SELECT p.x, p.n, p.c FROM Objednavky AS o
 INNER JOIN ……(MONTH, o.DatumVytvoreni = 11 ) ORDER BY p.Nazev
 ```
 
-### Another
-
 #### 9
 ```sql
 SELECT Druh, Count(DruhProdejeID) Počet FROM Nemovitosti 
-INNER JOIN DruhProdeje ON DruhProdejeID = Nemovitosti.DruhProdejeID GROUP BY Druh
+INNER JOIN DruhProdeje ON DruhProdejeID = Nemovitosti.DruProID GROUP BY Druh
+SELECT CAST("2019-08-19" AS DATE);
+NOT IN !!!
+
+SELECT Ucitel, Prijimeni FROM Ucitel
+LEFT JOIN Predmet ON Ucitel.UcitelID
+WHERE titul IS NOT NULL
+GROUP BY Ucitel.Prijimeni, Ucitel.Jmeno
+HAVING Count.Predmet, predmetID
 ```
 
 ```sql
-NOT IN !!!
+SELECT * FROM Pujcka WHERE vraceni IS NULL
+AND DATEDIFF(DAY, GETDATE(), vypujceni)>20
 ```
-### Cast
-```sql
-SELECT CAST("2019-08-19" AS DATE);
-```
+
