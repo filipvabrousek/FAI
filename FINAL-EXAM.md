@@ -9,7 +9,7 @@
 * cizích klíčů může být více
 * každá hodnota cizího klíče je buď plně zadaná / plně nezadaná
 * do pole cizího klíče nejde dát hodnota, která není v primárním klíči
-
+* 
 
 
 ### Kardinalita
