@@ -14,15 +14,16 @@
 * do pole cizího klíče nejde dát hodnota, která není v primárním klíči
 * **slabá entita** = pro její identifikaci musí být použit atribut jiné entity.
 * přidat atribut = (přidat sloupec)
-* referenční integrita = 
-
+* referenční integrita = definuje se cizím klíčem nad dvojicí tabulek, nebo nad 1 tabulkou, která obsahuje závislá data
+* INDEX není tabulka
+* Logická nezávislost dat = Odolnost externích schémat při změnách konceptuálního schématu
 
 
 ### Kardinalita
 * 1:1, 1:n, m:n
 
 ### SQL
-* ``` RIGHT JOIN``` = každý záznam z R tabulky, se musí spojit se záznamem z L, pokud nenejde, spojí se s null
+* ``` RIGHT JOIN``` = každý záznam z druhé tabulky se musí spojit s některým záznamem první tabulky, jinak NULL
 * ```LEFT JOIN``` = každý záznam z " tabulky, se musí spojit se záznamem z R, pokud nenajde z pravé, není match
 
 
@@ -57,7 +58,8 @@ SELECT LEFT("Karel Jaromír Erben", 5)
 ```sql
 SELECT k.n, Avg(p.cena) FROM Kategorie AS k INNER JOIN Produkty AS p ON k.id = p.id GROUP BY k.nazev
 SELECT * FROM Kat WHERE katID NOT IN (SELECT DISTINCT KatID FROM produkty)
-SELECT LEFT("Karel Jaromír Erben", 5)
+
+```sql
 SELECT * FROM Kniha WHERE Cena > 100
 ```
 
@@ -75,7 +77,7 @@ SELECT * FROM Uzivatel WHERE Projmeni LIKE "A%"
 ```
 
 ```sql
-ALTER TRIGGER
+UPDATE TRIGGER
 ```
 
 ```sql
@@ -122,14 +124,18 @@ SELECT datediff(day,getdate(),replace(´rok-12-24´,´rok´year(getdate()))
 
 ```sql
 0, 2, 4, 6, 8
-SELECTp.Produkty, p.Nazev, p.Cena FROM Objednavky AS o INNER JOIN ……(MONTH, o.DatumVytvoreni = 11 ) ORDER BY p.Nazev
+SELECT p.x, p.n, p.c FROM Objednavky AS o INNER JOIN ……(MONTH, o.DatumVytvoreni = 11 ) ORDER BY p.Nazev
 ```
 
-### ANother
+### Another
 
-``sql
+#### 9
+```
+SELECT Druh, Count(DruhProdejeID) Počet FROM Nemovitosti INNER JOIN DruhProdeje ON DruhProdejeID = Nemovitosti.DruhProdejeID GROUP BY Druh
+```
 
-
+```sql
+NOT IN !!!
 ```
 ### Cast
 ```sql
