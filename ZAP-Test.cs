@@ -78,7 +78,7 @@ namespace Test1SEMZAP
             c2.b = 3.0;
 
             var abs1 = Math.Sqrt(c1.a * c1.a + c1.b * c1.b);
-            var abs2 = Math.Sqrt(c2.a * c2.b + c2.b * c2.b);
+            var abs2 = Math.Sqrt(c2.a * c2.a + c2.b * c2.b);
 
 
             if (abs1 > abs2)
