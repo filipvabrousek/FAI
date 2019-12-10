@@ -1,7 +1,6 @@
 ## Data types
-* Hodnotvé typy:
-
-
+* Referenční typ: string, class, array, List
+* Hodnotvé typy: struct, int, byte, doube, bollean, char
 
 
 ```csharp
