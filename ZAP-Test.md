@@ -1,3 +1,10 @@
+## Data types
+* Hodnotvé typy:
+
+
+
+
+```csharp
 using System;
 namespace Test1SEMZAP
 {
@@ -289,3 +296,4 @@ namespace Test1SEMZAP
 
     }
 }
+```
