@@ -1,3 +1,4 @@
+```sql
 CREATE DATABASE CMS;
 use CMS;
 
@@ -163,7 +164,6 @@ SELECT UPPER(content) FROM Comments GROUP BY idPublisher;
 
 /*15*/
 SELECT COUNT(*) FROM Comments WHERE idPublisher = 2; 
-d
-
+```
 
 
