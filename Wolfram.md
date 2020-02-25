@@ -15,7 +15,7 @@ Plot[Sin[x], {x, 0, 2 Pi}, Frame -> True -> FrameStyle -> {RGBColor[1,0,0], Thic
 ```
 
 ## Matrices
-```
+```mathematica
 m = [{2, 1}, {2,3}]
 Det[m]
 ```
