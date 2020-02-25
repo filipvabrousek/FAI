@@ -1,7 +1,7 @@
-## Wolfram Mathematica
+# Wolfram Mathematica
 
 
-### Charts
+## Charts
 ```mathematica
 PieChart[{1, 2}]
 ```
