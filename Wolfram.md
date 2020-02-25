@@ -10,9 +10,6 @@ PieChart[{1, 2}]
 Plot[Sin[x], {x, 0, 2 Pi}]
 ```
 
-```mathematica
-Plot[Sin[x], {x, 0, 2 Pi}, Frame -> True -> FrameStyle -> {RGBColor[1,0,0], Thickness[0.0.1]}]
-```
 
 ## Matrices
 ```mathematica
