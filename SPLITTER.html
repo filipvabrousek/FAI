@@ -1,0 +1,238 @@
+<script>
+
+	
+ var array = [[1, 2, 3, 4, 5, 5]];	
+	
+	
+// var split = [];
+function part(array){
+	
+var split = [];	
+	
+for (var i = 0; i < array.length; i++){
+	let sub = array[i];
+
+	if (sub.length > 1){
+let splitPoint = findSplitPoint(sub, sub.length);
+let first = sub.slice(0, splitPoint);
+let second = sub.slice(splitPoint, sub.length);
+	split.push(first);
+	split.push(second);
+	} else {
+		split.push([sub[0]]);
+	}
+	
+}
+	
+return split;
+	
+}
+	
+	
+	
+// BIG FIELD CONTAINS ONLY SINGLE ELEMENTS
+function containsOnlySingle(arr){
+	var allow = true;
+	
+	for (var i = 0; i < arr.length; i++){
+		if (arr[i].length > 1){
+			allow = false;
+		}
+	}
+	return allow;
+}
+	
+	
+var versions = [];
+
+	
+while(containsOnlySingle(part(array)) == false){
+	console.log("oih")
+	array = part(array);
+	console.log(array);
+	
+	versions.push(array);
+}
+
+var final = [];
+
+for (var i = 0; i < array.length; i++){
+	
+	
+	if (array[i].length == 2){
+		for (var j = 0; j < array[i].length; j++){
+			final.push([array[i][j]]);
+			
+		}
+	} else {
+		final.push(array[i]);
+	}
+}
+
+	
+versions.push(final);
+console.warn(versions);
+	
+	
+	
+	
+	
+console.log("-------------------------")
+
+var binaryVersions = [];
+	
+for (var i = 0; i < versions.length; i++){
+	for (var j = 0; j < versions[i].length; j++){
+		
+	var sub = versions[i][j];
+	
+	var obj = {
+		arr: sub,
+		binary: (j % 2) == 0 ? Array(sub.length).fill(0) : Array(sub.length).fill(1)
+	}
+	
+	binaryVersions.push(obj);	
+	}
+}	
+	
+console.log(binaryVersions);
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/*let arr = [[1], [1, 2]];
+	let ct = containsOnlySingle(arr);
+	console.warn(ct);
+	*/
+	
+	
+
+	/*
+console.log("-----------------");
+var res = part(array);
+console.warn(res);
+	
+var copy = part(res);
+console.warn(copy);
+	
+var copa = part(copy);
+console.warn(copa);
+	
+// PROBLEM HERE
+var suba = part(copa);
+console.warn(suba);
+	*/
+	
+	////var res = part(array);
+	
+	
+	
+	
+	
+	
+	
+	
+	/*
+let contains = containsOnlySingle(copa);	
+console.log(contains);
+	
+	*/
+	
+	/*
+var last = part(copy);
+console.warn(last);
+*/	
+/*
+while(containsOnlySingle(res) == false){
+	res = part(array);
+}*/
+	//part(split);
+	
+	
+	
+	
+	/*
+while(wa.length > 0){
+	let SP1 = findSplitPoint(wa, wa.length);
+	wa = wa.splice(0, SA);
+	bq = wa.splice(0, SB);
+	console.log(wa);
+	console.log(bq);
+}
+	*/
+	
+	
+function printVertically(arr){
+	for (var i = 0; i < arr.length; i++){
+		console.log(`${arr[i]}\n`);
+	}
+}
+	
+function findSplitPoint(arr, n){
+ var leftSum = 0;
+
+for (var i = 0; i < n; i++){
+	leftSum += arr[i];
+	
+	var rightSum = 0;
+	
+	for (var j = i + 1; j < n; j++){
+		rightSum += arr[j];		
+	}
+	
+	if (leftSum == rightSum){
+			return i + 1;
+	}
+}
+	return -1;
+}
+	
+	
+
+
+	
+	
+	
+	
+	
+	/*
+	
+function getSubArrays(arr, point){
+	let first = arr.slice(0, point);
+	let second = arr.slice(point, arr.length);
+	
+	console.log(first);
+	console.log(second);
+	
+	
+	let sp1 = findSplitPoint(first, first.length);
+	let sp2 = findSplitPoint(second, second.length);
+	
+	
+	if ((sp1.length >= 1) || (sp2.length >= 1)) {
+		getSubArrays(sp1, sp1.length);
+		getSubArrays(sp2, sp2.length);
+		
+		console.log(sp1);
+	console.log(sp2);
+	}
+}*/
+	
+	
+
+	
+
+	
+	
+// https://www.wikitechy.com/interview-questions/java/how-to-optimally-divide-an-array-into-two-subarrays
+	
+
+
+
+</script>
