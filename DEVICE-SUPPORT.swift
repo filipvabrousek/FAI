@@ -1,3 +1,5 @@
+// UNIVERSAL CHECKER - 28/04/2020
+
 import UIKit
 
 public extension UIDevice {
