@@ -1,5 +1,12 @@
+//
+//  File.swift
+//  Runny
+//
+//  Created by Filip Vabroušek on 28/04/2020.
+//  Copyright © 2020 Filip Vabroušek. All rights reserved.
+//
 
-
+import UIKit
 
 public extension UIDevice {
     
@@ -13,7 +20,6 @@ public extension UIDevice {
         }
         
         func mapToDevice(identifier: String) -> String { // swiftlint:disable:this cyclomatic_complexity
-            #if os(iOS)
             switch identifier {
                 
             // IPHONE
@@ -52,34 +58,30 @@ public extension UIDevice {
             case "iPad8,5", "iPad8,6", "iPad8,7", "iPad8,8":return "iPad Pro (12.9-inch) (3rd generation)"
             case "iPad8,11", "iPad8,12":                    return "iPad Pro (12.9-inch) (4th generation)"
                 
-            // APPLE TV
-            case "AppleTV5,3":                              return "Apple TV"
-            case "AppleTV6,2":                              return "Apple TV 4K"
-           
-            // HOMEPOD
-            case "AudioAccessory1,1":                       return "HomePod"
-                
             // SIMULATOR
             case "i386", "x86_64":                          return "Simulator \(mapToDevice(identifier: ProcessInfo().environment["SIMULATOR_MODEL_IDENTIFIER"] ?? "iOS"))"
             default:                                        return identifier
             }
-            #elseif os(tvOS)
-            switch identifier {
-            case "AppleTV5,3": return "Apple TV 4"
-            case "AppleTV6,2": return "Apple TV 4K"
-            case "i386", "x86_64": return "Simulator \(mapToDevice(identifier: ProcessInfo().environment["SIMULATOR_MODEL_IDENTIFIER"] ?? "tvOS"))"
-            default: return identifier
-            }
-            #endif
         }
         
         return mapToDevice(identifier: identifier)
     }()
 }
 
-
 // ------------------------------------------------------------- IPHONE NAMES -------------------------------------------------------------
+
 public extension UIDevice {
+    var isSmall: Bool {
+           let devices = ["iPhone SE", "iPhone 5s", "Simulator iPhone 5s", "Simulator iPhone SE"]
+           
+           let d = UIDevice.modelName
+           if devices.contains(d){
+               return true
+           } else {
+               return false
+           }
+       }
+    
     var is47: Bool {
         let small = ["iPhone 6", "iPhone 6s", "iPhone 7", "iPhone 8", "iPhone SE (2nd generation)"]
         let sim = small.map {"Simulator \($0)"}
