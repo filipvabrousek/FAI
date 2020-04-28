@@ -1,6 +1,5 @@
 ## UIDevice extension
 
-
 ```swift
 
 import UIKit
