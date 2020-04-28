@@ -118,11 +118,6 @@ public extension UIDevice {
         }
     }
 }
-
-
-
-
-
 ```
 
 
@@ -158,7 +153,7 @@ class Checker {
       }
     
     func is11P() -> Bool {
-            let devices = ["iPad Pro (11-inch)", "Simulator iPad Pro (11-inch)"]
+            let devices = ["iPad Pro (11-inch)", "Simulator iPad Pro (11-inch)", "iPad Pro (11-inch) (2nd generation)"]
 
             let device = UIDevice.modelName
 
@@ -206,6 +201,7 @@ class Checker {
 
             //-- iPad Pro
             "iPad Pro (11-inch)", "Simulator iPad Pro (11-inch)",
+            "iPad Pro (11-inch) (2nd generation)", "Simulator iPad Pro (11-inch) (2nd generation)",
             "iPad Pro (10.5-inch)", "Simulator iPad Pro (10.5-inch)",
             "iPad Pro (12.9-inch)", "Simulator iPad Pro (12.9-inch)",
             "iPad Pro (12.9-inch) (4th generation)", "Simulator iPad Pro (12.9-inch) (4th generation)",
@@ -265,7 +261,8 @@ class Checker {
         let devs = [
             //-- iPad Pro
             "iPad Pro (11-inch)", "Simulator iPad Pro (11-inch)",
-            "iPad Pro (10.5-inch)", "Simulator iPad Pro (10.5-inch)"
+            "iPad Pro (10.5-inch)", "Simulator iPad Pro (10.5-inch)",
+            "iPad Pro (11-inch) (2nd generation)", "Simulator iPad Pro (11-inch) (2nd generation)"
         ]
 
         // "Simulator iPad Air (3rd generation)" NEW 2019
