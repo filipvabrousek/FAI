@@ -1,10 +1,7 @@
-//
-//  File.swift
-//  Runny
-//
-//  Created by Filip Vabroušek on 28/04/2020.
-//  Copyright © 2020 Filip Vabroušek. All rights reserved.
-//
+## UIDevice extension
+
+
+```swift
 
 import UIKit
 
@@ -121,3 +118,276 @@ public extension UIDevice {
         }
     }
 }
+
+
+
+
+
+```
+
+
+
+## Checker 
+
+```swift
+class Checker {
+    var p: String = ""
+
+    func is97Ipad() -> Bool {
+        let devices = ["iPad Pro (9.7-inch)", "Simulator iPad Pro (9.7-inch)"]
+
+        let device = UIDevice.modelName
+
+        if (devices.contains(device)) {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func is105P() -> Bool {
+          let devices = ["iPad Pro (10.5-inch)", "Simulator iPad Pro (10.5-inch)"]
+
+          let device = UIDevice.modelName
+
+          if (devices.contains(device)) {
+              return true
+          } else {
+              return false
+          }
+      }
+    
+    func is11P() -> Bool {
+            let devices = ["iPad Pro (11-inch)", "Simulator iPad Pro (11-inch)"]
+
+            let device = UIDevice.modelName
+
+            if (devices.contains(device)) {
+                return true
+            } else {
+                return false
+            }
+        }
+    
+    func isIpad7() -> Bool {
+              let devices = ["iPad7,12", "Simulator iPad7,12"]
+
+              let device = UIDevice.modelName
+
+              if (devices.contains(device)) {
+                  return true
+              } else {
+                  return false
+              }
+          }
+    
+    
+    //
+    func isAir3() -> Bool {
+               let devices = ["iPad Air (3rd generation)", "Simulator iPad Air (3rd generation)"]
+
+               let device = UIDevice.modelName
+
+               if (devices.contains(device)) {
+                   return true
+               } else {
+                   return false
+               }
+           }
+
+    func isIpad() -> Bool {
+        let devices = [
+            // iPad
+            "iPad 5", "Simulator iPad 5",
+            "iPad 6", "Simulator iPad 6",
+            "iPad Air", "Simulator iPad Air",
+            "iPad Air 2", "Simulator iPad Air 2",
+            "iPad Mini 2", "iPad Mini 3", "iPad Mini 4", // have no simulators, same as the iPad 9.7
+
+            //-- iPad Pro
+            "iPad Pro (11-inch)", "Simulator iPad Pro (11-inch)",
+            "iPad Pro (10.5-inch)", "Simulator iPad Pro (10.5-inch)",
+            "iPad Pro (12.9-inch)", "Simulator iPad Pro (12.9-inch)",
+            "iPad Pro (12.9-inch) (4th generation)", "Simulator iPad Pro (12.9-inch) (4th generation)",
+            "iPad Pro (12.9-inch) (3rd generation)", "Simulator iPad Pro (12.9-inch) (3rd generation)",
+            "iPad Pro (12.9-inch) (2nd generation)", "Simulator iPad Pro (12.9-inch) (2nd generation)",
+            "iPad Pro (9.7-inch)", "Simulator iPad Pro (9.7-inch)",
+            "iPad Air (3rd generation)", "Simulator iPad Air (3rd generation)",
+            "iPad7,12", "Simulator iPad7,12"
+        ]
+
+
+        let device = UIDevice.modelName
+
+        if (devices.contains(device)) {
+            return true
+        } else {
+            return false
+        }
+    }
+
+
+    func isIphone() ->  Bool {
+        let devices = [
+            "iPhone X", "iPhone XS", "iPhone 11 Pro", "iPhone XS Max", "iPhone XR", "iPhone 11", "iPhone 11 Pro Max", "iPhone 6", "iPhone 6s", "iPhone 7", "iPhone 8", "iPhone SE", "iPhone 5s", "iPhone SE (2nd generation)"
+        ]
+
+        let sims = devices.map { "Simulator \($0)" }
+
+        let device = UIDevice.modelName
+
+        if (devices.contains(device)) || sims.contains(device) {
+            return true
+        } else {
+            return false
+        }
+    }
+
+
+    func isBiggestIpad() -> Bool {
+        let devs = [
+            "iPad Pro (12.9-inch)", "Simulator iPad Pro (12.9-inch)",
+            "iPad Pro (12.9-inch) (2nd generation)", "Simulator iPad Pro (12.9-inch) (2nd generation)",
+            "iPad Pro (12.9-inch) (3rd generation)", "Simulator iPad Pro (12.9-inch) (3rd generation)",
+            "iPad Pro (12.9-inch) (4th generation)", "Simulator iPad Pro (12.9-inch) (4th generation)"]
+        
+        let device = UIDevice.modelName
+        print("Device in is BiggestIPad \(device)")
+
+        if (devs.contains(device)) {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func isNot97() -> Bool {
+        let devs = [
+            //-- iPad Pro
+            "iPad Pro (11-inch)", "Simulator iPad Pro (11-inch)",
+            "iPad Pro (10.5-inch)", "Simulator iPad Pro (10.5-inch)"
+        ]
+
+        // "Simulator iPad Air (3rd generation)" NEW 2019
+        let device = UIDevice.modelName
+
+        if (devs.contains(device)) {
+            print("SMALL \(device)")
+            return true
+        } else {
+            return false
+        }
+    }
+
+
+    func isSmallIpad() -> Bool {
+        let devs = ["iPad 5", "Simulator iPad 5",
+            "iPad 6", "Simulator iPad 6",
+            "iPad Air", "Simulator iPad Air",
+            "iPad Air 2", "Simulator iPad Air 2",
+            "iPad Mini 2", "iPad Mini 3", "iPad Mini 4", // have no simulators, same as the iPad 9.7
+            "iPad Pro (9.7-inch)", "Simulator iPad Pro (9.7-inch)",
+            "iPad Air (3rd generation)", "Simulator iPad Air (3rd generation)"
+        ]
+
+        let device = UIDevice.modelName
+
+        if (devs.contains(device)) {
+            print("SMALL \(device)")
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func is58() -> Bool {
+        let devs = ["iPhone X", "iPhone XS", "iPhone 11 Pro"]
+        let mapped = devs.map { "Simulator \($0)" }
+
+        // "Simulator iPad Air (3rd generation)" NEW 2019
+        let device = UIDevice.modelName
+
+        if (devs.contains(device) || mapped.contains(device)) {
+          //  print("PRO MODEL \(device)")
+            return true
+        } else {
+            return false
+        }
+    }
+
+    func is6561() -> Bool {
+        let devs = ["iPhone XS Max", "iPhone XR", "iPhone 11", "iPhone 11 Pro Max"]
+        let mapped = devs.map { "Simulator \($0)" }
+
+        // "Simulator iPad Air (3rd generation)" NEW 2019
+        let device = UIDevice.modelName
+
+        if (devs.contains(device) || mapped.contains(device)) {
+            print("SMALL \(device)")
+            return true
+        } else {
+            return false
+        }
+    }
+
+    func is4() -> Bool {
+        let devs = ["iPhone 5s", "iPhone SE"]
+        let mapped = devs.map { "Simulator \($0)" }
+
+        // "Simulator iPad Air (3rd generation)" NEW 2019
+        let device = UIDevice.modelName
+
+        if (devs.contains(device) || mapped.contains(device)) {
+            print("SMALL \(device)")
+            return true
+        } else {
+            return false
+        }
+    }
+
+    func is47() -> Bool {
+        let devs = ["iPhone 6", "iPhone 6s", "iPhone 7", "iPhone 8", "iPhone SE (2nd generation)"]
+        let mapped = devs.map { "Simulator \($0)" }
+
+        // "Simulator iPad Air (3rd generation)" NEW 2019
+        let device = UIDevice.modelName
+
+        if (devs.contains(device) || mapped.contains(device)) {
+            print("SMALL \(device)")
+            return true
+        } else {
+            return false
+        }
+    }
+
+    func isSmall() -> Bool {
+        let devs = ["iPhone SE", "iPhone 5s"]
+        let mapped = devs.map { "Simulator \($0)" }
+
+        // "Simulator iPad Air (3rd generation)" NEW 2019
+        let device = UIDevice.modelName
+
+        if (devs.contains(device) || mapped.contains(device)) {
+            print("SMALL \(device)")
+            return true
+        } else {
+            return false
+        }
+    }
+
+    func is55() -> Bool {
+        let devs = ["iPhone 6 Plus", "iPhone 7 Plus", "iPhone 8 Plus"]
+        let mapped = devs.map { "Simulator \($0)" }
+
+        // "Simulator iPad Air (3rd generation)" NEW 2019
+        let device = UIDevice.modelName
+
+        if (devs.contains(device) || mapped.contains(device)) {
+            print("SMALL \(device)")
+            return true
+        } else {
+            return false
+        }
+    }
+}
+```
