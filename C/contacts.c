@@ -11,6 +11,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
+#include <stdbool.h>
 
  int len = 1;
 
@@ -35,8 +36,6 @@ void addContact(){
        char phone[10];
        char entireContact[90];
     
-      
-       
        printf("\nEnter name: ");
        scanf("%s", name);
        
@@ -54,108 +53,99 @@ void addContact(){
      
        int newContactLen = sizeof(entireContact) / sizeof(entireContact[0]);
        
-       printf("\n");
+       printf("\n"); // MAKE SPACE :)
        
-       // Copy characters from temporary array to phonebook
+       // fill 2D data array
        for (int i = 0; i < newContactLen; i++) {
            data[len][i] = entireContact[i];
        }
-       
-       // increment length of the phonebook
-       len += 1;
+        
+       len += 1; // MAKE SPACE FOR OTHER ELEMENTS
 }
 
-// Print all contacts function
-void printContacts(char data[][100], int len) {
+// List contacts
+void listContacts(char data[][100], int len) {
     for (int i = 0; i < len; i++) {
         printf("%s\n", data[i]);
     }
 }
 
 
-
-// SEARCHING BY NAME AND SURNAME
-void searchUser(char data[][100], int len, char* by){
-    for (int i = 0; i < len; i++) {
-           printf("%s\n", data[i]);
-        if (strncmp(by, data[i], 100) == 0){
-            printf("I have found the user! \n");
-        } else {
-            printf("I haven't found the user. \n");
-        }
-       }
-}
-
-
-// Find contact by its name
-void findContactByName(char phonebook[][100], int len) {
+// Search by name or surname
+void searchByNameOrSurname(char data[][100], int len) {
     char name[50];
     char ch;
     
-    printf("\nDo you want to search by name (n) or surname (s)?: ");
+    printf("\n Search by name (N)");
+    printf("\n Search by surname (S)");
+    printf("\n");
+    
     scanf("\n%c", &ch);
-    
-    printf("Please enter a string you want to search: ");
-    scanf("%s", name);
-    
-    
-    // Searching name - I know, its not very efficient, but we are in C ... :D
-    // I am very pampered by higher programming languages :D (".contains method for example")
-    // Also, its case sensitive
-    if (ch == 'n') {
-        for (int i = 0; i < len; i++) {
-            char tmpName[30] = {0};
-            int tmpIndex = i;
-            int iterator = 0;
         
-            for (int y = 0; y <= 30; y++) {
-                if (phonebook[i][y] == '-') {
-                    break;
-                } else {
-                    tmpName[iterator] = phonebook[i][y];
-                    iterator++;
-                }
-            }
-        
-            // Compare names and return the result
-            int result = strcmp(name, tmpName);
-        
-            if (result == 0) {
-                printf("\n%s", phonebook[tmpIndex]);
-                break;
-            }
-        }
-    } else {
-        
-        for (int i = 0; i < len; i++) {
-            char tmpSurname[50] = {0};
-            int tmpIndex = i;
-            int iterator = 0;
-            int separator = 0;
-        
-            for (int y = 0; y <= 85; y++) {
-                if (phonebook[i][y] == '-') {
-                    separator += 1;
-                    continue;
-                }
-                
-                if (separator == 1) {
-                    tmpSurname[iterator] = phonebook[i][y];
-                    iterator++;
-                } else if (separator == 2) { break; }
-            }
-        
-            // Compare names and return the result
-            int result = strcmp(name, tmpSurname);
-        
-            if (result == 0) {
-                printf("\n%s", phonebook[tmpIndex]);
-                break;
-            }
-            
-        }
-    }
+        if (ch == 'N') {
+               printf("Enter searched name: ");
+               scanf("%s", name);
+           
+               for (int i = 0; i < len; i++) {
+                   int temp = i;
+                   int iterator = 0;
+                   char tempn[30] = {0};
+                  
+               
+                   for (int y = 0; y <= 30; y++) {
+                       if (data[i][y] == '-') { // VALUE AFTER FIRST "-"
+                           break;
+                       } else {
+                           tempn[iterator] = data[i][y];
+                           iterator++;
+                       }
+                   }
+               
+                   int result = strcmp(name, tempn); // STRCMP WILL RETURN 0 IF STRINGS ARE EQUAL
+               
+                   if (result == 0) {
+                       printf("\n%s", data[temp]); // GET DATA FROM ORIGINAL ARRAY AT INDEX "TEMP"
+                       break; // IF STRINGS ARE EQUAL, STOPS THE LOOP
+                   }
+               }
+           } else if (ch == 'S') {
+               printf("Enter searched surname: ");
+               scanf("%s", name);
+               
+               for (int i = 0; i < len; i++) {
+                   int it = 0;
+                   int separator = 0;
+                   char tempS[50] = {0};
+                   int tmpIndex = i;
+                  
+               
+                   for (int y = 0; y <= 85; y++) { // VALUE AFTER SECOND "-"
+                       if (data[i][y] == '-') {
+                           separator += 1;
+                           continue;
+                       }
+                       
+                       if (separator == 1) {
+                           tempS[it] = data[i][y];
+                           it++;
+                       } else if (separator == 2) { break; }
+                   }
+               
+     
+                   int result = strcmp(name, tempS); // STRCMP WILL RETURN 0 IF STRINGS ARE EQUAL
+               
+                   if (result == 0) {
+                       printf("\n%s", data[tmpIndex]); // GET DATA FROM ORIGINAL ARRAY AT INDEX "TEMP"
+                       break; // IF STRINGS ARE EQUAL, STOP THE LOOP
+                   }
+               }
+           } else {
+               printf("INVALID INPUT.");
+           }
 }
+
+
+/*
 
 // Find contact by its name
 void findByName(char data[][100], int len) {
@@ -234,7 +224,7 @@ void findByName(char data[][100], int len) {
             
         }
     }
-}
+}*/
 
 
 
@@ -282,7 +272,7 @@ int main(int argc, const char * argv[]) {
     
     if (task == 'v') {
         int len = sizeof(data) / sizeof(data[0]);
-        printContacts(data, len);
+        listContacts(data, len);
     } else if (task == 'e'){
         printf("PhoneBook closed");
     } else if (task == 'p') {
@@ -291,8 +281,8 @@ int main(int argc, const char * argv[]) {
     } else if (task == 'h'){
        int len = sizeof(data) / sizeof(data[0]);
         
-        findContactByName(data, len);
-      // findByName(data, len);
+       // findContactByName(data, len);
+       searchByNameOrSurname(data, len);
     } else {
         printf("Character not found");
     }
