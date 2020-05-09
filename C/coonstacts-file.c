@@ -72,7 +72,6 @@ void listContacts(char data[][100], int len) {
 void loadDataToFile(char data[][100], int len){
     printf("I am creating text file with contents of the PhoneBook.");
     
-    
     // 1 - ZADÁNÍ CESTY K SOUBORU
     printf("Zadejte cestu k souboru.");
     char name[20];
@@ -99,34 +98,44 @@ void loadDataToFile(char data[][100], int len){
 
 
 
-void openFile(/*char name[][100]*/){
-    
+/*
+void openFile(){
     char string[300];
-    
     // 1 - ZADÁNÍ NÁZVU SOUBORU
       printf("Zadejte cestu k souboru.");
       char name[300];
       scanf("%s", &name);
-    
-    // 2 -
     FILE *fptr;
-
       if ((fptr = fopen(name,"r")) == NULL){
           printf("Error! opening file");
           // Program exits if the file pointer returns NULL.
           exit(1);
       }
-
       fscanf(fptr,"%s", &name);
-    printf("%s", name);
-    
-    
-    
-    
-    
+      printf("%s", name);
+}*/
+
+
+void readFile(){
+    FILE * fp;
+    char * line = NULL;
+    size_t len = 0;
+    ssize_t read;
+
+    fp = fopen("nicer.txt", "r");
+    if (fp == NULL)
+        exit(EXIT_FAILURE);
+
+    while ((read = getline(&line, &len, fp)) != -1) {
+      //  printf("Retrieved line of length %zu:\n", read);
+        printf("%s", line);
+    }
+
+    fclose(fp);
+    if (line)
+        free(line);
+    exit(EXIT_SUCCESS);
 }
-
-
 
 
 
@@ -215,8 +224,8 @@ int main(int argc, const char * argv[]) {
      printf("v - vypis \n");
      printf("h - hledej \n");
      printf("k - konec \n");
-     printf("C - vytvor textovy soubor \n");
-     printf("R - precti textovy soubor");
+     printf("C - create text file \n");
+     printf("R - read text file");
     
     char task;
     scanf(" %c", &task);
@@ -236,7 +245,8 @@ int main(int argc, const char * argv[]) {
         int len = sizeof(data) / sizeof(data[0]);
         loadDataToFile(data, len);
     } else if (task == 'R'){
-        openFile();
+        readFile();
+       // openFile();
     } else {
         printf("Invalid input. Only 'v', 'k', 'p' 'h' and 'C' are allowed.");
     }
