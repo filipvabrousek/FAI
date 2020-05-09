@@ -23,7 +23,7 @@ struct contact {
 
 int length = 1;
 struct contact arr_student[MAX] = {
-    {"Filip", "Vabroušek", "280830702"}
+    {"Filip", "Vabrousek", "280830702"}
 };
 
 /*---------------------------------------------LIST CONTACTS---------------------------------------------*/
@@ -38,7 +38,7 @@ void listContacts(struct contact data[], int len) {
 
 /*---------------------------------------------ADD NEW CONTACT---------------------------------------------*/
 void structureAdd() {
-        int i = 1; //sizeof(arr_student) / sizeof(arr_student[0]);;
+        int i = 1;
         printf("\nEnter details of student %d\n\n", i+1);
  
         printf("Enter name: ");
@@ -64,18 +64,26 @@ void readFile(){
     size_t len = 0;
     ssize_t read;
     
+    // 1 - ENTER THE PATH TO THE FILE
     printf("Zadejte cestu k souboru.");
     char name[20];
     scanf("%s", &name);
     
+    // 2 - OPEN THE FILE
     fp = fopen(name, "r");
-    if (fp == NULL)
-        exit(EXIT_FAILURE);
+    
+    // 3 - IF THERE IS AN ERROR WHILE CREATING THE FILE, EXIT
+    if (fp == NULL){
+         exit(EXIT_FAILURE);
+    }
+       
 
+    // 4 - READ LINE-BY-LINE
     while ((read = getline(&line, &len, fp)) != -1) {
         printf("%s", line);
     }
 
+    // 5 - CLOSE THE FILE AND FREE MEMORY
     fclose(fp);
     if (line){
       free(line);
@@ -85,111 +93,59 @@ void readFile(){
 }
 
 
+
 /*---------------------------------------------SAVE DATA TO THE FILE---------------------------------------------*/
 void structuresToFile(struct contact data[], int len){
     printf("I am creating text file with contents of the PhoneBook.");
        
-       // 1 - ZADÁNÍ CESTY K SOUBORU
+       // 1 - ENTER THE PATH TO THE FILE
        printf("Zadejte cestu k souboru.");
        char name[20];
        scanf("%s", &name);
        
-       // 2 - VYTVOŘENÍ SOUBORU
+       // 2 - CREATE THE FILE
        FILE *fptr;
        fptr = fopen(name,"w");
 
-       // 3 - CHYBA PŘI VYTVÁŘENÍ SOUBORU
+       // 3 - ERROR WHILE CREATING THE FILE, EXIT
        if(fptr == NULL) {
           printf("Error in file creation.");
           exit(1);
        }
         
-       // 4 - ZÁPIS DAT DO SOUBORU
+       // 4 - WRITE DATA TO FILE
        for (int i = 0; i < len; i++) {
            fprintf(fptr,"%s\n",data[i].name);
            fprintf(fptr,"%s\n",data[i].surname);
            fprintf(fptr,"%s\n",data[i].number);
        }
+    
+        // 5 - CLOSE THE FILE
        fclose(fptr);
 }
 
-
-// Search by name or surname
-void searchByNameOrSurname(char data[][100], int len) {
-    char name[50];
-    char ch;
-    
-    printf("\n Search by name (N)");
-    printf("\n Search by surname (S)");
-    printf("\n");
-    
-    scanf("\n%c", &ch);
-        
-        if (ch == 'N') {
-               printf("Enter searched name: ");
-               scanf("%s", name);
-           
-               for (int i = 0; i < len; i++) {
-                   int temp = i;
-                   int iterator = 0;
-                   char tempn[30] = {0};
-                  
-               
-                   for (int y = 0; y <= 30; y++) {
-                       if (data[i][y] == '-') { // VALUE AFTER FIRST "-"
-                           break;
-                       } else {
-                           tempn[iterator] = data[i][y];
-                           iterator++;
-                       }
-                   }
-               
-                   int result = strcmp(name, tempn); // STRCMP WILL RETURN 0 IF STRINGS ARE EQUAL
-               
-                   if (result == 0) {
-                       printf("\n%s", data[temp]); // GET DATA FROM ORIGINAL ARRAY AT INDEX "TEMP"
-                       break; // IF STRINGS ARE EQUAL, STOPS THE LOOP
-                   }
-               }
-           } else if (ch == 'S') {
-               printf("Enter searched surname: ");
-               scanf("%s", name);
-               
-               for (int i = 0; i < len; i++) {
-                   int it = 0;
-                   int separator = 0;
-                   char tempS[50] = {0};
-                   int tmpIndex = i;
-                  
-               
-                   for (int y = 0; y <= 85; y++) { // VALUE AFTER SECOND "-"
-                       if (data[i][y] == '-') {
-                           separator += 1;
-                           continue;
-                       }
-                       
-                       if (separator == 1) {
-                           tempS[it] = data[i][y];
-                           it++;
-                       } else if (separator == 2) { break; }
-                   }
-               
-     
-                   int result = strcmp(name, tempS); // STRCMP WILL RETURN 0 IF STRINGS ARE EQUAL
-               
-                   if (result == 0) {
-                       printf("\n%s", data[tmpIndex]); // GET DATA FROM ORIGINAL ARRAY AT INDEX "TEMP"
-                       break; // IF STRINGS ARE EQUAL, STOP THE LOOP
-                   }
-               }
-           } else {
-               printf("INVALID INPUT.");
-           }
+/*---------------------------------------------SEARCH IN PHONEBOOK---------------------------------------------*/
+void searchName(struct contact data[], int len, char name[], bool byName){
+    if (byName){
+        for (int i = 0; i < len; i++){
+            if (strcmp(data[i].name, name) == 0){
+                printf("I have found user: %s \n", name);
+                printf("NAME: %s \n", data[i].name);
+                printf("SURNAME %s \n", data[i].surname);
+                printf("NUMBER %s \n", data[i].number);
+            }
+        }
+    } else {
+        for (int i = 0; i < len; i++){
+            if (strcmp(data[i].surname, name) == 0){
+                 printf("I have found user: %s \n", name);
+                 printf("NAME: %s \n", data[i].name);
+                 printf("SURNAME %s \n", data[i].surname);
+                 printf("NUMBER %s \n", data[i].number);
+            }
+        }
+    }
 }
-
-
-
-
 
 int main(int argc, const char * argv[]) {
      printf("Menu \n");
@@ -213,16 +169,30 @@ int main(int argc, const char * argv[]) {
     } else if (task == 'p') {
         structureAdd();
     } else if (task == 'h'){
-        printf("IMPLEMENT SEARCHING");
-      // int len = sizeof(data) / sizeof(data[0]);
-      // searchByNameOrSurname(data, len);
+        char choice[1];
+        char searched[50];
+        int len = sizeof(arr_student) / sizeof(arr_student[0]);
+
+        printf("Search by name (N) or surname (S) \n");
+        scanf("%s", choice);
+        
+        if (strcmp(choice, "N") == 0){
+            printf("Enter searched name \n");
+            scanf("%s", searched);
+            searchName(arr_student, len, searched, true);
+        } else if (strcmp(choice, "S") == 0){
+            printf("Enter searched surname \n");
+            scanf("%s", searched);
+            searchName(arr_student, len, searched, false);
+            
+        } else { printf("INVALID INPUTS!");}
     } else if (task == 'C'){
         int len = sizeof(arr_student) / sizeof(arr_student[0]);
         structuresToFile(arr_student, len);
     } else if (task == 'R'){
         readFile();
     } else {
-        printf("Invalid input. Only 'v', 'k', 'p' 'h' and 'C' are allowed.");
+        printf("Invalid input. Only 'v', 'k', 'p' 'h', 'C' and 'R' are allowed.");
     }
     return 0;
 }
