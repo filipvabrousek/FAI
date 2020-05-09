@@ -56,18 +56,19 @@ void structureAdd() {
         listContacts(arr_student, len);
 }
 
+
 /*---------------------------------------------READ FILE---------------------------------------------*/
 void readFile(){
     FILE * fp;
     char * line = NULL;
     size_t len = 0;
     ssize_t read;
-
     
+    printf("Zadejte cestu k souboru.");
+    char name[20];
+    scanf("%s", &name);
     
-    
-    
-    fp = fopen("EPQA.txt", "r");
+    fp = fopen(name, "r");
     if (fp == NULL)
         exit(EXIT_FAILURE);
 
