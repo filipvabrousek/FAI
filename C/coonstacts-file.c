@@ -11,132 +11,106 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+#define MAX 4
 
- int len = 1;
+/*---------------------------------------------VARIABLES DEFINITIONS---------------------------------------------*/
 
-static char data[][100] = {
-    "Filip-Vabrousek-126157162",
-    "Karel-Sykora-12839282",
-    "Tereza-Barosova-87651429"
-};
-
-struct contact
-{
+struct contact {
     char name[30];
     char surname[50];
     char number[10];
 };
 
-void addContact(){
-       char name[30];
-       char surname[50];
-       char phone[10];
-       char entireContact[90];
-    
-       printf("\nEnter name: ");
-       scanf("%s", name);
-       
-       printf("Enter surname: ");
-       scanf("%s", surname);
-       
-       printf("Enter number: ");
-       scanf("%s", phone);
-       
-       strcpy(entireContact, name);
-       strcat(entireContact, ",");
-       strcat(entireContact, surname);
-       strcat(entireContact, ",");
-       strcat(entireContact, phone);
-     
-       int newContactLen = sizeof(entireContact) / sizeof(entireContact[0]);
-       printf("\n"); // MAKE SPACE :)
-       
-       // fill 2D data array
-       for (int i = 0; i < newContactLen; i++) {
-           data[len][i] = entireContact[i];
-       }
-        
-       len += 1; // MAKE SPACE FOR OTHER ELEMENTS
-}
+int length = 1;
+struct contact arr_student[MAX] = {
+    {"Filip", "Vabroušek", "280830702"}
+};
 
-
-
-// List contacts
-void listContacts(char data[][100], int len) {
+/*---------------------------------------------LIST CONTACTS---------------------------------------------*/
+void listContacts(struct contact data[], int len) {
     for (int i = 0; i < len; i++) {
-        printf("%s\n", data[i]);
+        printf("NAME %s \n", data[i].name);
+        printf("SURNAME %s \n", data[i].surname);
+        printf("NUMBER %s \n", data[i].number);
+        printf("%s", "-------------------------------------");
     }
 }
 
-
-void loadDataToFile(char data[][100], int len){
-    printf("I am creating text file with contents of the PhoneBook.");
+/*---------------------------------------------ADD NEW CONTACT---------------------------------------------*/
+void structureAdd() {
+        int i = 1; //sizeof(arr_student) / sizeof(arr_student[0]);;
+        printf("\nEnter details of student %d\n\n", i+1);
+ 
+        printf("Enter name: ");
+        scanf("%s", arr_student[i].name);
+ 
+        printf("Enter surname: ");
+        scanf("%s", &arr_student[i].surname);
+ 
+        printf("Enter number: ");
+        scanf("%s", &arr_student[i].number);
+        printf("\n");
     
-    // 1 - ZADÁNÍ CESTY K SOUBORU
-    printf("Zadejte cestu k souboru.");
-    char name[20];
-    scanf("%s", &name);
-    
-    // 2 - VYTVOŘENÍ SOUBORU
-    FILE *fptr;
-    fptr = fopen(name,"w");
-
-    // 3 - CHYBA PŘI VYTVÁŘENÍ SOUBORU
-    if(fptr == NULL) {
-       printf("Error in file creation.");
-       exit(1);
-    }
-     
-    // 4 - ZÁPIS DAT DO SOUBORU
-    for (int i = 0; i < len; i++) {
-        fprintf(fptr,"%s\n",data[i]);
-    }
-    
-    
-    fclose(fptr);
+        // SHOW WHATS INISIDE AFTER ADDING
+        int len = sizeof(arr_student) / sizeof(arr_student[0]);
+        listContacts(arr_student, len);
 }
 
-
-
-/*
-void openFile(){
-    char string[300];
-    // 1 - ZADÁNÍ NÁZVU SOUBORU
-      printf("Zadejte cestu k souboru.");
-      char name[300];
-      scanf("%s", &name);
-    FILE *fptr;
-      if ((fptr = fopen(name,"r")) == NULL){
-          printf("Error! opening file");
-          // Program exits if the file pointer returns NULL.
-          exit(1);
-      }
-      fscanf(fptr,"%s", &name);
-      printf("%s", name);
-}*/
-
-
+/*---------------------------------------------READ FILE---------------------------------------------*/
 void readFile(){
     FILE * fp;
     char * line = NULL;
     size_t len = 0;
     ssize_t read;
 
-    fp = fopen("nicer.txt", "r");
+    
+    
+    
+    
+    fp = fopen("EPQA.txt", "r");
     if (fp == NULL)
         exit(EXIT_FAILURE);
 
     while ((read = getline(&line, &len, fp)) != -1) {
-      //  printf("Retrieved line of length %zu:\n", read);
         printf("%s", line);
     }
 
     fclose(fp);
-    if (line)
-        free(line);
+    if (line){
+      free(line);
+    }
+    
     exit(EXIT_SUCCESS);
 }
 
+
+/*---------------------------------------------SAVE DATA TO THE FILE---------------------------------------------*/
+void structuresToFile(struct contact data[], int len){
+    printf("I am creating text file with contents of the PhoneBook.");
+       
+       // 1 - ZADÁNÍ CESTY K SOUBORU
+       printf("Zadejte cestu k souboru.");
+       char name[20];
+       scanf("%s", &name);
+       
+       // 2 - VYTVOŘENÍ SOUBORU
+       FILE *fptr;
+       fptr = fopen(name,"w");
+
+       // 3 - CHYBA PŘI VYTVÁŘENÍ SOUBORU
+       if(fptr == NULL) {
+          printf("Error in file creation.");
+          exit(1);
+       }
+        
+       // 4 - ZÁPIS DAT DO SOUBORU
+       for (int i = 0; i < len; i++) {
+           fprintf(fptr,"%s\n",data[i].name);
+           fprintf(fptr,"%s\n",data[i].surname);
+           fprintf(fptr,"%s\n",data[i].number);
+       }
+       fclose(fptr);
+}
 
 
 // Search by name or surname
@@ -231,22 +205,21 @@ int main(int argc, const char * argv[]) {
     scanf(" %c", &task);
     
     if (task == 'v') {
-        int len = sizeof(data) / sizeof(data[0]);
-        listContacts(data, len);
+        int len = sizeof(arr_student) / sizeof(arr_student[0]);
+        listContacts(arr_student, len);
     } else if (task == 'k'){
         printf("The PhoneBook was closed");
     } else if (task == 'p') {
-        printf("ADDING USER");
-        addContact();
+        structureAdd();
     } else if (task == 'h'){
-       int len = sizeof(data) / sizeof(data[0]);
-       searchByNameOrSurname(data, len);
+        printf("IMPLEMENT SEARCHING");
+      // int len = sizeof(data) / sizeof(data[0]);
+      // searchByNameOrSurname(data, len);
     } else if (task == 'C'){
-        int len = sizeof(data) / sizeof(data[0]);
-        loadDataToFile(data, len);
+        int len = sizeof(arr_student) / sizeof(arr_student[0]);
+        structuresToFile(arr_student, len);
     } else if (task == 'R'){
         readFile();
-       // openFile();
     } else {
         printf("Invalid input. Only 'v', 'k', 'p' 'h' and 'C' are allowed.");
     }
