@@ -127,9 +127,18 @@ namespace DragonCopy
         public abstract double randAttack();
         public abstract void hitBy(double damage);
         public abstract int chooseOponent(int oponentIndex, List<Base> b);
+
+        public int CompareTo(Base that)
+        {
+
+            Console.WriteLine("huii");
+            if (health > that.maxDamage) return -1;
+            if (health == that.maxDamage) return 0;
+            return 1;
+        }
     }
 
-    class Hero : Base, IComparable<Hero> {
+    class Hero : Base, IComparable<Hero>{
         String name;
         Sword sword;
         Shield shield;
@@ -193,6 +202,8 @@ namespace DragonCopy
         {
             Console.WriteLine("JAA");
         }
+
+        
     }
 
 
@@ -206,7 +217,18 @@ namespace DragonCopy
 
         public override double randAttack(){
             int attackValue = Randomizer.Next(1, 5);
-            return attackValue;
+
+
+            int fire = Randomizer.Next(1, 10); // random defense activation
+
+            if (fire < 6)
+            {
+                return attackValue;
+            }
+            else {
+                return 0;
+            }
+           
               // health -= randDamage;
         }
 
@@ -383,18 +405,18 @@ namespace DragonCopy
 
 
 
-   /*  class Counter
-    {
-        public event EventHandler ThresholdReached;
+    /*  class Counter
+     {
+         public event EventHandler ThresholdReached;
 
-        protected virtual void OnThresholdReached(EventArgs e)
-        {
-            EventHandler handler = ThresholdReached;
-            handler?.Invoke(this, e);
-        }
+         protected virtual void OnThresholdReached(EventArgs e)
+         {
+             EventHandler handler = ThresholdReached;
+             handler?.Invoke(this, e);
+         }
 
-        // provide remaining implementation for the class
-    } */
+         // provide remaining implementation for the class
+     } */
 
 
     // https://docs.microsoft.com/en-us/dotnet/standard/events/
@@ -415,7 +437,7 @@ namespace DragonCopy
 
 
 
-      
+
 
 
 
@@ -465,7 +487,7 @@ namespace DragonCopy
                     Console.WriteLine($"Dragon {dragon.getName()} ");
                 }
 
-                if (obj is Hero){
+                if (obj is Hero) {
                     Hero hero = (Hero)(obj);
                     Console.WriteLine($"Hero {hero.getName()} ");
                 }
@@ -474,94 +496,228 @@ namespace DragonCopy
 
 
 
+
+
+
+
+
+
+
+
+        public static void fightHero(Hero me, Hero oponent) {
+
+            // choose 2, 3
+            Console.WriteLine("FIGHTING");
+            int round = 0;
+            string ara = "";
+
+            StreamWriter writetext = new StreamWriter("write.txt");
+
+            while (me.isDead() == false && oponent.isDead() == false)
+            {
+
+                round += 1;
+                // oponent.randAttack();
+                me.hitBy(oponent.randAttack());
+                oponent.hitBy(me.randAttack());
+
+                Console.WriteLine($"------------------------------- ROUND {round} -------------------------------");
+
+                String meLost = $"I lost {oponent.randAttack()} lives. \n";
+                String meRamining = $"I have remaining {oponent.getHealth()} lives. \n";
+
+                String oponentLost = $" Oponent lost {oponent.randAttack()} lives. \n";
+                String remainingLost = $"Oponent has remaining {oponent.getHealth()} lives. \n";
+
+                Console.WriteLine(meLost);
+                Console.WriteLine(meRamining);
+
+                Console.WriteLine(oponentLost);
+                Console.WriteLine(remainingLost);
+
+                ara += meLost;
+                ara += meRamining;
+
+                ara += oponentLost;
+                ara += remainingLost;
+
+
+                //  string createText = "Hello and Welcome" + Environment.NewLine;
+            }
+
+
+            ara += "------------------------------------------ \n";
+
+            if (oponent.isDead())
+            {
+                Console.WriteLine("I won!");
+                ara += "I won";
+            }
+            else
+            {
+                Console.WriteLine("Oponent won!");
+                ara += "Oponent won";
+            }
+
+
+            File.WriteAllText("results.txt", ara);
+        }
+
+        public static void fightHeroAndDragon(Hero me, Dragon oponent)
+        {
+            // choose 2, 3
+            Console.WriteLine("FIGHTING");
+            int round = 0;
+            string ara = "";
+
+            StreamWriter writetext = new StreamWriter("write.txt");
+
+            while (me.isDead() == false && oponent.isDead() == false)
+            {
+
+                round += 1;
+                // oponent.randAttack();
+                me.hitBy(oponent.randAttack());
+                oponent.hitBy(me.randAttack());
+
+                Console.WriteLine($"------------------------------- ROUND {round} -------------------------------");
+
+                String meLost = $"I lost {oponent.randAttack()} lives. \n";
+                String meRamining = $"I have remaining {oponent.getHealth()} lives. \n";
+
+                String oponentLost = $" Oponent lost {oponent.randAttack()} lives. \n";
+                String remainingLost = $"Oponent has remaining {oponent.getHealth()} lives. \n";
+
+                Console.WriteLine(meLost);
+                Console.WriteLine(meRamining);
+
+                Console.WriteLine(oponentLost);
+                Console.WriteLine(remainingLost);
+
+                ara += meLost;
+                ara += meRamining;
+
+                ara += oponentLost;
+                ara += remainingLost;
+
+
+                //  string createText = "Hello and Welcome" + Environment.NewLine;
+            }
+
+
+            ara += "------------------------------------------ \n";
+
+            if (oponent.isDead())
+            {
+                Console.WriteLine("I won!");
+                ara += "I won";
+            }
+            else
+            {
+                Console.WriteLine("Oponent won!");
+                ara += "Oponent won";
+            }
+
+
+            File.WriteAllText("results.txt", ara);
+
+
+
+
+        }
+
+
+
+
+
+
+
         public static void fight(Base ME, Base OPONENT) {
             if ((ME is Hero) && (OPONENT is Dragon))
             {
                 Hero me = ((Hero)ME);
                 Dragon oponent = ((Dragon)OPONENT);
+                fightHeroAndDragon(me, oponent);
 
-
-                // choose 2, 3
-                Console.WriteLine("FIGHTING");
-
-                int round = 0;
-
-
-                string ara = "";
-
-                StreamWriter writetext = new StreamWriter("write.txt");
-
-                while (me.isDead() == false && oponent.isDead() == false) {
-
-                    round += 1;
-                   // oponent.randAttack();
-                    me.hitBy(oponent.randAttack());
-                    oponent.hitBy(me.randAttack());
-
-                    Console.WriteLine($"------------------------------- ROUND {round} -------------------------------");
-
-                    String meLost = $"I lost {oponent.randAttack()} lives. \n";
-                    String meRamining = $"I have remaining {oponent.getHealth()} lives. \n";
-
-                    String oponentLost = $" Oponent lost {oponent.randAttack()} lives. \n";
-                    String remainingLost = $"Oponent has remaining {oponent.getHealth()} lives. \n";
-
-                    Console.WriteLine(meLost);
-                    Console.WriteLine(meRamining);
-
-                    Console.WriteLine(oponentLost);
-                    Console.WriteLine(remainingLost);
-
-                    ara += meLost;
-                    ara += meRamining;
-
-                    ara += oponentLost;
-                    ara += remainingLost;
-
-
-                    //  string createText = "Hello and Welcome" + Environment.NewLine;
-                }
-
-
-                ara += "------------------------------------------ \n";
-
-                if (oponent.isDead()) {
-                    Console.WriteLine("I won!");
-                    ara += "I won";
-                } else {
-                    Console.WriteLine("Oponent won!");
-                    ara += "Oponent won";
-                }
-
-
-                File.WriteAllText("results.txt", ara);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            } else if ((ME is Hero) && (OPONENT is Hero)) {
+                Hero me = ((Hero)ME);
+                Hero oponent = ((Hero)OPONENT);
+                fightHero(me, oponent);
             }
+        }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        public static List<Base> SortUsingCompareTo (List<Base> characters){
+
+           // characters.Sort();
+            /*  try
+              {
+                  characters.Sort();
+              }
+              catch (Exception e)
+              {
+                  Console.WriteLine("UIGIUG");
+                  Console.WriteLine(e);
+              }*/
+
+
+            return characters;
 
         }
+
+
+
 
         public static void Main(string[] args) {
             int round = 0;
@@ -578,6 +734,30 @@ namespace DragonCopy
 
             dataManipulation(characters);
             listCharacters(characters);
+
+
+
+            List<Base> usingCompareTo = SortUsingCompareTo(characters);
+
+            for (var i = 0; i < usingCompareTo.Count; i++) {
+                Base d = convert(usingCompareTo[i]);
+                if (d is Dragon)
+                {
+                    Dragon dra = ((Dragon)d);
+                    Console.WriteLine(dra.getName());
+                }
+
+                if (d is Hero)
+                {
+                    Hero hero = ((Hero)d);
+                    Console.WriteLine(hero.getName());
+                }
+
+
+
+
+
+            }
 
             Console.WriteLine("Choose your character (enter index)");
             int aidx = int.Parse(Console.ReadLine());
