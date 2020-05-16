@@ -1,5 +1,65 @@
 ## Virtual methods
 
+
+
+### Mine
+
+
+```cs
+
+// DEDIČNOST, UPCASTING, DOWNCASTING
+  class Person {
+        public String name {
+            get; set;
+        }
+
+        public Person(String name) {
+            this.name = name;
+        }
+
+        // odkomentovat aby nezáleželo na typu refrence
+         public /*virtual*/ string getType() {
+            return "Person";
+        }
+    }
+
+    class Student : Person {
+        public int age { get; set; }
+
+        public Student(string name, int age) : base(name) {
+            this.age = age;
+        }
+
+        // odkomentovat aby nezáleželo na typu refrence
+        public /*overide*/ string getType() {
+            return "Student";
+        }
+    }
+
+// UPCASTING
+            Student st = new Student("Filip", 20);
+            Person p = st;
+            print(p.getType()); // "Person" (rozhoduje type REFERENCE (TYP) proměnné)
+            // po odkomentování nahoře -> "Student" nezáleží na typu reference
+
+    // DOWNCASTING
+            Person m = new Person("Petr");
+            Student o = m as Student; // as vrátí NULL, pokud se downcasting nepovedl
+  
+            checkDowncasting(o);
+            
+            static void checkDowncasting(Student someone) {
+            if (someone is Person person)
+                
+            {
+                print($"Student: ${someone.name}");
+            } else {
+                print("Someone else. Downcasting has failed.");
+            }
+        }
+
+```
+
 ```cs
 using System;
 
