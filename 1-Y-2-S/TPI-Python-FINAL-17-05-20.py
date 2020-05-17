@@ -1,17 +1,12 @@
 import numpy
 import sys
 
-
-letter = input("Zadejte písmeno: ");
+letter = input("Zadejte malé písmeno: ");
 
 numbers = ["0000", "0001", "0010", "0011", "0100", "0101", "0110", "0111", "1000", "1001", "1010", "1011", "1100", "1101", "1110", "1111"];
 
 a=ord('a')
 alph=[chr(i) for i in range(a,a+26)]
-
-print(numbers[alph.index(letter)]);
-
-
 
 val = letter
 val1 =  numbers[alph.index(val)] #val
@@ -36,20 +31,26 @@ def flipbit(enc,bitpos):
 	
 
 def hamming(inp):
-  g =  numpy.array([[1, 0, 0, 0, 1, 1, 1],[0, 1, 0, 0, 0, 1, 1],[ 0, 0 ,1 ,0 ,1 ,0 ,1],[0, 0, 0, 1, 1, 1, 0]])
-  h = numpy.array([[ 1, 0, 1, 1, 1, 0, 0],[1 ,1 ,0 ,1 ,0 ,1 ,0],[ 1 ,1, 1, 0, 0, 0, 1],])
+  g =  numpy.array([
+  [1, 0, 0, 0, 1, 1, 0],
+  [0, 1, 0, 0, 1, 0, 1],
+  [0, 0 ,1 ,0 ,0 ,1 ,1],
+  [0, 0, 0, 1, 1, 1, 1]])
+
+  h = numpy.array([
+  [ 1, 1, 0, 1, 1, 0, 0],
+  [1 ,0 ,1 ,1 ,0 ,1 ,0],
+  [ 0 ,1, 1, 1, 0, 0, 1],])
   
   inp = inp[:4]
-
   enc = encode(inp, g)
-
   dec = decode(enc, h)
-  print ("Vstup  \t\tKódováno (0 ch.)  \tPozice chyby")
+  
+  print ("Vstup  \t\tKód (0 chyb)  \tPozice chyby")
   print (inp,"\t",enc,"\t",dec)
 
   print ("----------------------")
-  print ("Jednotlivé chyby")
-  print ("Vstup  \t\tKódováno (1 ch.)  \tPozice chyby")
+  print ("Vstup  \t\tKód (1 chyba)  \tPozice chyby")
   for i in range (0,7):
     enc = encode(inp, g)
     enc1=flipbit(enc,i)
