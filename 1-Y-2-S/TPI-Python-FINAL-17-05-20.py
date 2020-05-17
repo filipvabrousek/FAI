@@ -9,18 +9,25 @@ a=ord('a')
 alph=[chr(i) for i in range(a,a+26)]
 
 val = letter
-val1 =  numbers[alph.index(val)] #val
+
+# nalezení odpovídajícího binárního kódu v listu 
+val1 =  numbers[alph.index(val)] 
 if (len(sys.argv)>1):
   val1=sys.argv[1]
 
+
+# zakódování
 def encode(m, g):
   en = numpy.dot(m, g)%2
   return en
 
+# dokódování
 def decode(m, h):
   dec = numpy.dot(h, m)%2
   return dec
 
+
+# záměna bitů
 def flipbit(enc,bitpos):
 
   if (enc[bitpos]==1):
@@ -30,22 +37,23 @@ def flipbit(enc,bitpos):
   return enc
 	
 
+# hamingův algoritmus
 def hamming(inp):
-  g =  numpy.array([
+  g =  numpy.array([   # generující matice G
   [1, 0, 0, 0, 1, 1, 0],
   [0, 1, 0, 0, 1, 0, 1],
   [0, 0 ,1 ,0 ,0 ,1 ,1],
   [0, 0, 0, 1, 1, 1, 1]])
 
-  h = numpy.array([
+  h = numpy.array([   # kontrolní matice H
   [ 1, 1, 0, 1, 1, 0, 0],
   [1 ,0 ,1 ,1 ,0 ,1 ,0],
   [ 0 ,1, 1, 1, 0, 0, 1],])
   
-  inp = inp[:4]
+  inp = inp[:4] # vstupní slovo
   enc = encode(inp, g)
   dec = decode(enc, h)
-  
+
   print ("Vstup  \t\tKód (0 chyb)  \tPozice chyby")
   print (inp,"\t",enc,"\t",dec)
 
