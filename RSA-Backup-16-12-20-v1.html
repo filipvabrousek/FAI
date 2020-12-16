@@ -1,0 +1,550 @@
+<script>
+    
+// 1 -------------------------------------- PRVOČÍSLA A PHI  -------------------------------------- 
+const p = 61; 
+const q = 53;  
+let phi = (p - 1) * (q - 1);
+    
+    console.log(phi);
+    
+// 2 -------------------------------------- GENEROVÁNÍ KLÍČŮ Z PRVOČÍSEL  --------------------------------------
+function modInverse(e, phi){
+  var m0 = phi, t, q;
+  var x0 = 0, x1 =1;
+  
+  if(phi == 1)
+    return 0;
+    
+  while (e > 1){
+    //q is quotient
+    q = Math.floor(e / phi);
+    t = phi;
+    // phi is remainder now, process same as
+    //Euclid's algo
+    phi = e % phi, e = t;
+    t =  x0;
+    x0 = x1 -q * x0;
+    x1 = t;
+  }  
+  
+  //Make x1 positive
+  if (x1 < 0)
+      x1 += m0;
+      
+    return x1;
+ }
+    
+
+function RSAKeyPair(p,q){
+         
+  //Need to check that they're not the same
+   if (p === q)
+           return;
+           
+    var n = p * q,
+            phi = (p-1)*(q-1),
+            e = 17,
+            d = modInverse(e,phi);
+   // console.log("MOD INVERSE " + d);
+  //Public key: [e,n], Private key: [d,n]
+      return[[e,n], [d,n]]              
+ }       
+    
+    
+let keys = RSAKeyPair(p, q);
+console.log("Public key");
+console.log(keys[0]);
+    
+    console.log("PRIVATE key");
+    console.log(keys[1]);
+    
+let private = keys[1][0];
+let public = keys[0][0];
+    
+
+    
+// 3 -------------------------------------- ZADÁNÍ TEXTU  --------------------------------------
+let input = "Vychazime"; //"Dneska je venku velice krásné počasí";
+    
+    
+// 4 -------------------------------------- DĚLENÍ PO 7-CÍCH  --------------------------------------
+var split = input.split("");
+var chunks = [];
+    
+var i,j,temparray,chunk = 7;
+for (i=0,j=split.length; i<j; i+=chunk) {
+    temparray = split.slice(i,i+chunk);
+    chunks.push(temparray);
+}
+    
+console.log(chunks);
+    
+    
+    
+
+    
+    
+    
+    
+//  z nasledujicich predpokladu
+    
+
+    
+for (var i = 0; i < chunks.length; i++){
+    let letter = chunks[i];
+    
+    for (var j = 0; j < chunks[i].length; j++){
+        
+        
+        
+        let letter = chunks[i][j];
+    console.warn(`Letter: ${letter} charCodeAt: ${String(letter).charCodeAt(0)}`)
+        
+        
+     
+    }
+    
+    
+  
+}
+    
+    
+    
+// 5 -------------------------------------- PŘEVOD DO BINÁRNÍ REPREZENTACE A DOPLNĚNÍ NA DÉLKU 10  --------------------------------------
+var codes = [];
+    
+for (var i = 0; i < chunks.length; i++){
+   codes.push(chunks[i].map(x => x.charCodeAt(0).toString(2).padStart(10, 0))); 
+}
+
+console.log(codes);
+
+let flat = codes.flat().join("");
+console.log(flat);
+// 0001000100000110111000011001010001110011000110101100011000010000100000
+   
+    
+    
+
+var groupedBinaries = [];
+for (var i = 0; i < codes.length; i++){
+    let data = codes[i].join("");
+    console.error(data);
+    groupedBinaries.push(data);
+}
+  
+var groupedInts = [];
+    
+for (var i = 0; i < groupedBinaries.length; i++){
+let int = parseInt(groupedBinaries[i], 2);
+groupedInts.push(int);
+}
+   
+    
+    
+console.log("----------------------CORRECT TILL HERE-----------------------");
+console.log(groupedInts);
+
+var bigIntsNew = groupedInts.map(n => BigInt(n));
+let encryptedNew = encryptArray(bigIntsNew, BigInt(public), BigInt(p) * BigInt(q), "ENCRYPTION");
+console.log(encryptedNew);   
+    
+    
+    
+let decrypted = encryptArray(encryptedNew, BigInt(private), BigInt(p) * BigInt(q), "DECRYPTION");
+    
+    
+console.log("🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥")
+
+// console.clear();    
+    
+// 6 -------------------------------------- ZAŠIFROVÁNÍ BIN. REP. POMOCÍ VEŘEJNÉHO KLÍČE  --------------------------------------
+function perform(number, power, mod) {
+    console.log("TESTA");
+    return number ** power % mod;
+}   
+    
+function encryptArray(numbers, e, pq, operation){
+ var res = [];
+
+ for (var i = 0; i < numbers.length; i++){
+ console.log(`NUMBER TO ${operation}: ${numbers[i]} e = ${e} pq = ${pq}`);
+ var encrypted = numbers[i] ** e % pq;
+ console.log(`AFTER ${operation}: (${numbers[i]} ** ${e} % ${pq}) = ${encrypted}`);
+console.log("🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄🎄");     
+    
+ res.push(encrypted);
+}
+
+return res;
+}
+    
+    
+
+    
+    
+    
+// Decryption
+    
+let decryptedInts = decrypted.map(n => Number(n));
+    
+    
+
+    
+
+    
+
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    /*
+var codesa = [];
+    
+for (var i = 0; i < chunks.length; i++){
+   codesa.push(chunks[i].map(x => x.charCodeAt(0))); 
+}
+
+console.log(codesa[0]);
+    
+    
+
+// convert to BigInt
+var bigInts = [];
+    
+for (var i = 0; i < codesa[0].length; i++){
+    let big = BigInt(codesa[0][i]);
+   // console.error(big);
+    bigInts.push(big);
+}
+
+console.log(bigInts);
+
+    
+    
+    
+let encrypted = encryptArray(bigInts, BigInt(public), BigInt(p) * BigInt(q), "ENCRYPTION");
+console.log(encrypted);
+// [1673n, 449n, 140n, 1255n, 512n, 901n, 962n]
+
+console.log("PRIVATE KEY");
+console.log(BigInt(private));    
+console.log(BigInt(p) * BigInt(q)); 
+    
+let decrypted = encryptArray(encrypted, BigInt(private), BigInt(p) * BigInt(q), "DECRYPTION");
+
+/* PROBLÉM ZDE: program vrátí hodnoty NaN (Not a Number), protože funkce Math.pow(base, exponent) nedokáže umocnit tak velká čísla, a neakceptuje čísla BigInt.
+
+Probíhá tato operace, kterou JavaScript nezvládne, a vrátí NaN (not a number) (Math.pow(68, 1767) = Infinity ==> Infinity % (31 * 57) = NaN)
+// Math.pow(68, 1767) % (31 * 57);
+
+
+console.log(decrypted);
+// [1673n, 740n, 1616n, 58n, 1709n, 721n, 683n]
+    
+    
+    
+
+    
+    
+    
+// convert to Number
+    
+    
+// convert to BigInt
+var numbers = [];
+    
+for (var i = 0; i < decrypted.length; i++){
+    let dec = Number(decrypted[i]);
+   // console.error(big);
+    numbers.push(dec);
+}
+    
+
+    
+
+    
+
+    
+// Convert back to binary
+var backBinaries = [];
+    
+for (var i = 0; i < numbers.length; i++){
+    console.warn(numbers[i]);
+    let bin = numbers[i].toString(2);
+    backBinaries.push(Number(bin));
+}
+
+console.log(backBinaries);
+    
+    
+
+
+// Convert back to ASCII 
+    
+var backASCII = [];
+    
+for (var i = 0; i < backBinaries.length; i++){
+    let bin = String.fromCharCode(numbers[i]);
+    backASCII.push(bin);
+}
+
+console.log(backASCII);
+    
+
+    
+    
+    
+    
+
+// [1673n, 1139n, 1217n, 457n, 1310n, 1120n, 683n]
+// [NaN, NaN, NaN, NaN, NaN, NaN, NaN]
+
+    
+    
+    
+    
+    
+    
+    
+    
+   
+function power(a, b)
+{
+   var temp=1, i;
+   for(i=1;i<=b;i++)
+      temp*=a;
+    return temp;
+}
+
+    
+    
+    
+ 
+   
+var binaried = [];
+    
+for (var i = 0; i < codes.length; i++){
+   binaried.push(codes[i].map(x => parseInt(x, 2))); 
+}
+
+console.warn(binaried);
+    
+    */
+    
+
+// ------------------------ ENCRYPTION
+function encrypt(N, e, M)
+{
+   var r,i=0,prod=1,rem_mod=0;
+   while (e>0)
+   {
+      r=e % 2;
+      if (i++==0)
+         rem_mod=M % N;
+      else
+         rem_mod=power(rem_mod,2) % N;
+      if (r==1)
+      {
+         prod*=rem_mod;
+         prod=prod % N;
+      }
+      e=parseInt(e/2);
+   }
+   return prod;
+}
+    
+    
+    /*
+let res = encrypt(p * q, 3, flat);
+console.log(res);
+    */
+    
+    
+function calculate_d(phi,e)
+{
+   var x,y,x1,x2,y1,y2,temp,r,orig_phi;
+   orig_phi=phi;
+   x2=1;x1=0;y2=0;y1=1;
+   while (e>0)
+   {
+      temp=parseInt(phi/e);
+      r=phi-temp*e;
+      x=x2-temp*x1;
+      y=y2-temp*y1;
+      phi=e;e=r;
+      x2=x1;x1=x;
+      y2=y1;y1=y;
+      if (phi==1)
+      {
+         y2+=orig_phi;
+         break;
+      }
+   }
+   return y2;
+}
+    
+    
+    
+let calcD = calculate_d(phi, 3);
+// console.log(calcD);
+
+    
+    function decrypt(c, d, N)
+{
+   var r,i=0,prod=1,rem_mod=0;
+   while (d>0)
+   {
+      r=d % 2;
+      if (i++==0)
+         rem_mod=c % N;
+      else
+         rem_mod=power(rem_mod,2) % N;
+      if (r==1)
+      {
+         prod*=rem_mod;
+         prod=prod % N;
+      }
+      d=parseInt(d/2);
+   }
+   return prod;
+}
+    
+    
+    function rel_prime(phi)
+{
+   var rel=5;
+   
+   while (gcd(phi,rel)!=1)
+      rel++;
+   return rel;
+}
+
+    
+    
+     //let deca = decrypt(res, calcD, p * q);
+    //  console.warn(deca);
+   
+   // let deca = decrypt(rel_prime(phi), calcD, p * q);
+  //  alert(deca);
+    
+    
+    function gcd (a, b)
+{
+   var r;
+   while (b>0)
+   {
+      r=a%b;
+      a=b;
+      b=r;
+   }
+   return a;
+}
+
+
+    
+    
+    
+function perform(number, power, mod){
+    
+   return number ** power % mod;
+   // return Math.pow(number, power) % mod;
+}
+    
+let re = perform("A", 3, 6);
+// console.warn(re);
+    
+    
+    
+
+    
+    /*
+function addZerosToTen(binary){
+    
+ let diff = 10 - binary.length;
+console.log(binary);
+    
+    
+
+let arr = binary.padStart(3, "0");
+console.log(arr);
+
+}*/
+    
+
+    
+
+
+
+    
+
+    
+    
+    /*
+var decimals = [];
+    
+for (var i = 0; i < codes.length; i++){
+    
+    
+    for (var j = 0; j < codes[i].length; j++){
+   decimals.push(parseInt(codes[i][j], 2)); 
+    }
+}
+
+console.log(decimals);
+    
+    */
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    /*
+var binaries = [];
+    
+for (var i = 0; i < codes.length; i++){
+   codes.push(chunks[i].map(x => x.charCodeAt(0))); 
+}
+
+console.log(codes);
+    */
+
+    
+
+    
+// let decadic = parseInt(flat, 2);
+// console.warn(decadic);
+    
+
+    
+    
+
+/*
+var res = 5312933 * 9150373;
+console.log(res);*/
+
+
+
+</script>
