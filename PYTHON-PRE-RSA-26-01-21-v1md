@@ -1,11 +1,6 @@
 ## Python-RSA 26-01-21-v1
 
 ```python
-# This is a sample Python script.
-
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
-
 import tkinter as tk
 from tkinter import *
 from tkinter.ttk import *
@@ -236,14 +231,5 @@ if __name__ == '__main__':
 
 
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
-
-# top = Tkinter.Tk()
-# Code to add widgets will go here...
-# top.mainloop()
-
-
-# 23:36:00 - alertBox
-# 23:31:40
 
 ```
