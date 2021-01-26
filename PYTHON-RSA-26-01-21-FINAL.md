@@ -70,7 +70,20 @@ def helloCallBack():
     print("N:", keys[0], "E", keys[1], "D", keys[2])
 
 
+
+
+
 class Test():
+    def generateKeysOnClick(self):
+        print("Generating")
+
+        keys = GenerateKeys()
+
+        self.NPrimeValue.set(keys[0])
+        self.EPrimeValue.set(keys[1])
+        self.DEntryValue.set(keys[2])
+
+
     def __init__(self):
         self.root = tk.Tk()
         self.text = tk.StringVar()
@@ -90,7 +103,6 @@ class Test():
         self.privateKey = tk.StringVar()
         self.publicKey = tk.StringVar()
 
-
         # ---------------------------------------------- SET DEFAULT VALUES ----------------------------------------------
         self.EPrimeValue.set("-")
         self.NPrimeValue.set("-")
@@ -99,10 +111,9 @@ class Test():
         self.NLabel = tk.Label(text="Enter N prime number")
         self.DLabel = tk.Label(text = "Enter D number")
 
-        self.EEntry = tk.Entry()
-        self.NEntry = tk.Entry()
-        self.DEntry = tk.Entry()
-
+        self.EEntry = tk.Entry(textvariable=self.EPrimeValue)
+        self.NEntry = tk.Entry(textvariable=self.NPrimeValue)
+        self.DEntry = tk.Entry(textvariable=self.DEntryValue)
 
         # E: 409519438965343006289656381889706943057
         # N: 792557954858978963581099474552990968343
@@ -111,7 +122,6 @@ class Test():
 
         # ---------------------------------------------- PRIME LABELS ----------------------------------------------
         self.NPrimeTitleLabel = tk.Label(text="N Prime number")
-
         self.nPrimeLabel = tk.Label(textvariable=self.NPrimeValue, fg='#3498db', font = ("Arial", 20))
 
         self.EPrimeTitleLabel = tk.Label(text="E Prime number")
@@ -127,22 +137,15 @@ class Test():
 
         self.decryptButton = tk.Button(self.root, text="DECRYPT", command=self.decryptText, font = ("Arial", 14), fg = "#3498db", padx = 7, pady = 7)
 
-
-
-
+        self.generateKeysButton = tk.Button(self.root, text="GENERATE KEYS", command=self.generateKeysOnClick, font = ("Arial", 14), fg = "#3498db", padx = 7, pady = 7)
 
         self.privateKeyLabel = tk.Label(textvariable=self.privateKey)
         self.publicKeyLabel = tk.Label(textvariable=self.publicKey)
 
 
-        #  self.encryptionField = tk.Entry(text)
+        self.generateKeysButton.pack()
 
-        # PRIMES UI
-
-
-       # self.nPrimeLabel.pack()
-
-        # self.ELabel.pack()
+        self.ELabel.pack()
         self.EEntry.pack()
 
         self.NLabel.pack()
@@ -153,9 +156,6 @@ class Test():
 
         self.publicKeyLabel.pack()
         self.privateKeyLabel.pack()
-
-
-
 
         self.enterValueToEncrypt.pack()
         self.inputField.pack()
@@ -175,17 +175,12 @@ class Test():
         return NumberToText([(pow(int(number), int(d), int(n))) for number in encodedText.split(' ')])
 
 
-
-        #  print("N:", keys[0], "E", keys[1], "D", keys[2])
-
-
     def decryptText(self):
         #  keys = GenerateKeys()
 
         N = self.NEntry.get()  # self.keys[0]
         ENumber = self.EEntry.get()  # self.keys[1]
         D = self.DEntry.get()  # self.keys[2]
-
 
         decrypted = Decrypt(self.encrypted, N, D) #self.keys[0], self.keys[2])
 
@@ -231,5 +226,13 @@ if __name__ == '__main__':
 
 
 
+# See PyCharm help at https://www.jetbrains.com/help/pycharm/
 
+# top = Tkinter.Tk()
+# Code to add widgets will go here...
+# top.mainloop()
+
+
+# 23:36:00 - alertBox
+# 23:31:40
 ```
