@@ -85,3 +85,10 @@ Final task 50b
 
 
 132457 begin
+
+
+
+## Code
+
+QSLider: QObject
+
